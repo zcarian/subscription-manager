@@ -29,7 +29,7 @@ export default function Form({onSubmit}) {
       event.preventDefault();
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData);
-      // onSubmit(data);
+      onSubmit(data);
     console.log(data)
     }   
 

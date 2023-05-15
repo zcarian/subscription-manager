@@ -1,11 +1,10 @@
-'use client';
-import Form from "@/components/Form/Form";
+import Form from "../../components/Form";
 import { useRouter } from "next/router";
 
 export default function AddEntryPage() {
-    // const router = useRouter();
+    const router = useRouter();
 
-    async function addApp(entryData) {
+    async function addApp(entryData: Object) {
         const response = await fetch("/api/add", {
             method: "POST",
             body: JSON.stringify(entryData),
@@ -15,7 +14,7 @@ export default function AddEntryPage() {
         });
         if (response.ok) {
             await response.json();
-            // router.push("/");
+            router.push("/");
         }
     }
 
