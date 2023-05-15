@@ -5,7 +5,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     await dbConnect();
 
-    if(req.method === "POST") {
+    if(req.method === "GET"){
+        const apps = await App.find();
+        return res.status(200).json(apps);
+        
+    } else if (req.method === "POST") {
         try {
             const appData = req.body;
             const app = new App(appData);
@@ -17,4 +21,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(400).json({ error: error.message });
         }
     }
+    
 }

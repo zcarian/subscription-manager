@@ -5,7 +5,7 @@ export default function AddEntryPage() {
     const router = useRouter();
 
     async function addApp(entryData: Object) {
-        const response = await fetch("/api/add", {
+        const response = await fetch("/api/subscribed-apps", {
             method: "POST",
             body: JSON.stringify(entryData),
             headers: {
