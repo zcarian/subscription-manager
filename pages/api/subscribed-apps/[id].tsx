@@ -14,5 +14,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         return res.status(200).json(app);
+    } else if (req.method==="DELETE"){  
+        const appToDelete = await App.findByIdAndDelete(id);
+
+        if (!appToDelete) {
+            return res.status(404).json({ status: 'Not found' });
+        }
+        return res.status(200).json({ success: "App deleted successfully"});
+
+        
+    } else if (req.method === "PATCH") {
+        const appToUpdate = await App.findByIdAndUpdate(id, {$set: req.body});
+
+        if (!appToUpdate) {
+            return res.status(404).json({ status: 'Not found' });
+        }
+        return res.status(200).json({ success: "App updated successfully"});
     }
 }
