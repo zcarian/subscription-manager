@@ -14,7 +14,7 @@ export default function AddEntryPage() {
         });
         if (response.ok) {
             await response.json();
-            router.push("/");
+            router.push("/subscribed-apps");
         }
     }
 

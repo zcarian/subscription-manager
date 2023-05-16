@@ -20,6 +20,7 @@ export default function EditPage() {
                 "Content-Type": "application/json",
             },
         });
+        push(`/subscribed-apps/${id}`);
     }
     return (
         <div>

@@ -15,6 +15,10 @@ export default function DetailsPage() {
     if (!isReady || isLoading || error) return <h2>Loading...</h2>;
     
     async function deleteApp() {
+        const confirmation = confirm("Are you sure you want to delete this app?");
+
+        if (!confirmation) return;
+        
         await fetch(`/api/subscribed-apps/${id}`, {
             method: "DELETE",
         });
@@ -25,7 +29,7 @@ export default function DetailsPage() {
         <div>
             <AppDetails app={app} />
             <button onClick={deleteApp} type='button'>Delete</button>
-            <Link href={`/subscribed-apps/${id}/edit`}></Link>
+            <Link href={`/subscribed-apps/${id}/edit`}>Edit</Link>            
         </div>
     );
 }
