@@ -14,7 +14,7 @@ export default function AddEntryPage() {
         });
         if (response.ok) {
             await response.json();
-            router.push("/");
+            router.push("/subscribed-apps");
         }
     }
 
@@ -22,7 +22,7 @@ export default function AddEntryPage() {
     return (
         <main>
             <h1>Add New App</h1>
-            <Form onSubmit={addApp}/>
+            <Form onSubmit={addApp} appData={""}/>
         </main>
     )
 }
