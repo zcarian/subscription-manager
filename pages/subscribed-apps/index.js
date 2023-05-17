@@ -10,7 +10,7 @@ export default function SubscribedAppsPage() {
         <div>
             <h1>Subscribed Apps</h1>
             <ul>
-                {data.map((app: any) => (
+                {data.map((app) => (
                     <li key={app._id}>
                         <AppPreview app={app} />
                     </li>

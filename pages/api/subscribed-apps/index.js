@@ -1,8 +1,7 @@
 import dbConnect from "../../../db/connect";
 import App from "../../../db/models/App";
-import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
     await dbConnect();
 
     if(req.method === "GET"){
