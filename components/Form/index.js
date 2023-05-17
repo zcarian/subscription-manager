@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import useAppDataSearch from "../../hooks/useAppDataSearch";
 
 const FormContainer = styled.form`
   display: flex;
-  /* grid-template-columns: 1fr 1fr; */
   flex-direction: column;
   gap: 16px;
   margin: 20px;
@@ -21,12 +21,13 @@ const StyledButton = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-`
+  `
 
 export default function Form({onSubmit, appData}) {
 
   const {name, price, currency, startDate, endDate, renewPeriod } = appData ?? {};
 
+  const { searchTerm, searchedAppData, handleChange } = useAppDataSearch();
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -38,7 +39,13 @@ export default function Form({onSubmit, appData}) {
     return (
     <FormContainer aria-labelledby="add-new-app" onSubmit={handleSubmit}>
         <Label htmlFor="name">Name</Label>
-        <input type="text" id="name" name="name" defaultValue={name} required />
+        <input type="text" id="name" name="name" defaultValue={name}  value={searchTerm} onChange={handleChange} required />
+        {searchedAppData && searchTerm!="" && (
+        <div>
+          <h2>{searchedAppData.name}</h2>
+          <img src={searchedAppData.icon} alt={searchedAppData.name} />
+        </div>
+      )}
 
         <Label htmlFor="price">Price</Label>
         <input type="number" id="price" name="price" min={0} defaultValue={price} required />
@@ -56,7 +63,7 @@ export default function Form({onSubmit, appData}) {
         <Label htmlFor="endDate">End Date</Label>
         <input type="date" id="endDate" name="endDate" defaultValue={endDate} />
 
-        <Label hmtlFor="renewPeriod">Renew Period</Label>
+        <Label htmlFor="renewPeriod">Renew Period</Label>
         <select id="renewPeriod" name="renewPeriod" defaultValue={renewPeriod} required>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
