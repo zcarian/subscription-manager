@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const appSchema = new Schema({
     name: { type: String, required: true },
+    icon: { type: String },
     price: { type: String, required: true },
     currency: { type: String, required: true },
     startDate: { type: String, required: true },

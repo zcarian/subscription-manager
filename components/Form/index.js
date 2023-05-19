@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useAppDataSearch from "../../hooks/useAppDataSearch";
 import { useEffect, useState } from "react";
 
 const FormContainer = styled.form`
@@ -25,17 +24,18 @@ const StyledButton = styled.button`
   `
 
 export default function Form({ onSubmit, appData }) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState( appData || {
     name: '',
     price: '',
-    currency: '',
+    currency: 'EUR',
     startDate: '',
     endDate: '',
-    renewPeriod: '',
+    renewPeriod: 'daily',
     icon: '',
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedAppData, setSearchedAppData] = useState([]);
+
 
   useEffect(() => {
     const fetchAppData = async () => {
@@ -61,7 +61,7 @@ export default function Form({ onSubmit, appData }) {
         } else {
           const appLinks = body.querySelectorAll('.fUEl2e .j2FCNc');
   
-          const appData = Array.from(appLinks) 
+          const appList = Array.from(appLinks) 
             .slice(0, 5)
             .map((appLink) => {
               appIcon = appLink.querySelector('img').getAttribute('src');
@@ -70,7 +70,7 @@ export default function Form({ onSubmit, appData }) {
               return { name: appName, icon: appIcon };
             });
   
-          setSearchedAppData(appData);
+          setSearchedAppData(appList);
         }
       } catch (error) {
         console.error(error);
@@ -92,6 +92,7 @@ export default function Form({ onSubmit, appData }) {
       ...prevData,
       [name]: value,
     }));
+    console.log(formData);
   };
 
   const handleNameChange = (e) => {
@@ -114,7 +115,7 @@ export default function Form({ onSubmit, appData }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    onSubmit(formData);
   }
 
   return (
@@ -126,7 +127,8 @@ export default function Form({ onSubmit, appData }) {
         <ul>
         {searchedAppData.map((suggestion, index) => (
           <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-            {suggestion.name} <img src={suggestion.icon} alt={suggestion.name} />
+            {suggestion.name} 
+            {suggestion.icon && <img src={suggestion.icon} alt={suggestion.name} /> }
           </li>
         ))}
       </ul>
@@ -137,8 +139,8 @@ export default function Form({ onSubmit, appData }) {
 
       <Label htmlFor="currency">Currency</Label>
       <select id="currency" name="currency" onChange={handleInputChange} value={formData.currency} required>
-        <option value="USD">USD</option>
         <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
         <option value="GBP">GBP</option>
       </select>
 
@@ -150,12 +152,15 @@ export default function Form({ onSubmit, appData }) {
 
       <Label htmlFor="renewPeriod">Renew Period</Label>
       <select id="renewPeriod" name="renewPeriod" onChange={handleInputChange} value={formData.renewPeriod} required>
-        <option value="daily">Daily</option>
+        <option value="daily" >Daily</option>
         <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
+        <option value="monthly" >Monthly</option>
         <option value="yearly">Yearly</option>
-        <option value="other">Other</option>
+        <option value="">Other</option>
       </select>
+      {formData.renewPeriod === "" && (
+        <input type="text" id="renewPeriod" name="renewPeriod" placeholder="" onChange={handleInputChange} value={formData.renewPeriod} />
+      )}
 
       <StyledButton type="submit">{appData ? "Edit app" : "Add app"}</StyledButton>
     </FormContainer>

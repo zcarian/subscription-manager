@@ -5,6 +5,7 @@ export default function AppDetails({app}) {
 
     return (
         <div>
+            <img src={app.icon} alt={`${app.name} icon`}/>
             <h1>{app.name}</h1>
             <h2>{app.price} {app.currency} piad {app.renewPeriod}</h2>
             <p>Started on: {app.startDate} {app.endDate ?`finish on: ${app.endDate}`:""}</p>

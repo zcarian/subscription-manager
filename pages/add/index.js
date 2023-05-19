@@ -22,7 +22,7 @@ export default function AddEntryPage() {
     return (
         <main>
             <h1>Add New App</h1>
-            <Form onSubmit={addApp} appData={""}/>
+            <Form onSubmit={addApp} />
         </main>
     )
 }
