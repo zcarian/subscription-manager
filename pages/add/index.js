@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default function AddEntryPage() {
     const router = useRouter();
 
-    async function addApp(entryData: Object) {
+    async function addApp(entryData) {
         const response = await fetch("/api/subscribed-apps", {
             method: "POST",
             body: JSON.stringify(entryData),
@@ -22,7 +22,7 @@ export default function AddEntryPage() {
     return (
         <main>
             <h1>Add New App</h1>
-            <Form onSubmit={addApp} appData={""}/>
+            <Form onSubmit={addApp} />
         </main>
     )
 }

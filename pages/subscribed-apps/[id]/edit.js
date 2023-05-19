@@ -12,7 +12,7 @@ export default function EditPage() {
     
     if (!isReady || isLoading || error) return <h2>Loading...</h2>;
     
-    async function editApp(appData: Object) {
+    async function editApp(appData) {
         await fetch(`/api/subscribed-apps/${id}`, {
             method: "PATCH",
             body: JSON.stringify(appData),
