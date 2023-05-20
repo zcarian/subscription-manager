@@ -1,9 +1,14 @@
 import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import NavBar from "../components/NavBar/index.js";
+import { SessionProvider } from "next-auth/react"
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
+    <SessionProvider session={session}>
     <SWRConfig
       value={{
         fetcher: async (args) => {
@@ -19,5 +24,6 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Component {...pageProps} />    
     </SWRConfig>
+    </SessionProvider>
   );
 }
