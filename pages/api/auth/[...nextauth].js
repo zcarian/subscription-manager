@@ -13,15 +13,12 @@ export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     async signIn(user) {
-      console.log("signed in");
-      console.log(user);
-
+      // console.log("signed in");
+      // console.log(user.user);
         user.user.apps = [];  
       return true;
     },
     async session({session, user}) {
-      // console.log("session", session);
-      // console.log("user", user);
       session.user.id = user.id;
       return session
     }

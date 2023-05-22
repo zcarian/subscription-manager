@@ -2,13 +2,19 @@ import useSWR from 'swr';
 import AppPreview from '../../components/AppPreview/AppPreview';
 
 export default function SubscribedAppsPage() {
-    const { data } = useSWR('/api/subscribed-apps', { fallbackData: [] });
+    const { data } = useSWR('/api/subscribed-apps');
 
-    const user = data[0]
+    console.log("data in subscribed-apps/index.js", data);
 
-    const apps = user.apps
+    // const apps = data.apps
 
-    if (!data) return <div>Loading...</div>;
+    // console.log("apps in subscribed-apps/index.js", data?.apps);
+    const apps = data?.apps
+
+    if (!data) return <div>Please log in.</div>;
+
+    if(data.apps.length === 0) return <div>You have no subscribed apps.</div>
+    
 
     return (
         <div>

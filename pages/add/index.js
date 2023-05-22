@@ -2,7 +2,6 @@ import Form from "../../components/Form";
 import { useRouter } from "next/router";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next"
-import { useSession } from "next-auth/react";
 
 export default function AddEntryPage() {
     const router = useRouter();
@@ -21,9 +20,6 @@ export default function AddEntryPage() {
           router.push("/subscribed-apps");
       }
   }
-  
-
-
     return (
         <main>
             <h1>Add New App</h1>

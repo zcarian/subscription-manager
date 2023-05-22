@@ -1,9 +1,9 @@
 import dbConnect from "../../../db/connect";
 import App from "../../../db/models/App";
-import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import User from "../../../db/models/User";
+
 export default async function handler(req, res) {
     await dbConnect();
 
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
 
     if(req.method === "GET"){
-        const user = await User.find({ email: session.user.email });
+        const user = await User.findOne({ _id: session.user.id });
         return res.status(200).json(user);
         
     } else if (req.method === "POST") {
@@ -25,19 +25,13 @@ export default async function handler(req, res) {
           const appData = req.body;
           const app = new App(appData);
           
-          const user = await User.findOneAndUpdate({ email: session.user.email })
+          const user = await User.findOneAndUpdate({ _id: session.user.id })
 
-          await app.save();
+          // await app.save();
 
           user.apps.push(app);
 
           await user.save();
-
-
-  
-          // const session = await getSession({ req });
-        
-
   
           res.status(201).json({ success: "App created successfully" });
       } catch (error) {
