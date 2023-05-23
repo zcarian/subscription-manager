@@ -110,7 +110,7 @@ export default function Form({ onSubmit, appData }) {
       name: suggestion.name,
       icon: suggestion.icon,
     }));
-    console.log(formData);
+    // console.log(formData);
   };
 
   function handleSubmit(event) {
