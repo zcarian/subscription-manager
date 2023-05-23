@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
     const session = await getServerSession( req, res, authOptions );
 
-    // console.log("session in api/subscribed-apps/index.js", session);
+    // console.log("session in api/subscribed-apps/index.js", session);s
 
     if(!session){
         return res.status(401).json({error: "You are not logged in"});
@@ -25,9 +25,7 @@ export default async function handler(req, res) {
           const appData = req.body;
           const app = new App(appData);
           
-          const user = await User.findOneAndUpdate({ _id: session.user.id })
-
-          // await app.save();
+          const user = await User.findOne({ _id: session.user.id })
 
           user.apps.push(app);
 
