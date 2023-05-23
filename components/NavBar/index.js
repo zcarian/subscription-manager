@@ -27,21 +27,21 @@ export default function NavBar() {
   const { data: session } = useSession()
 
     return (
-        <StyledNav>
-            {session && (
-                <StyledDiv>
-                    Signed in as {session.user.name}
-                </StyledDiv>
-            )}
-            <StyledLink href="/">
-                Home
-            </StyledLink>
-            <StyledLink href="/add">
-                 Add App
-            </StyledLink>
-            <StyledLink href="/subscribed-apps">
-                Subscribed Apps
-            </StyledLink>
-        </StyledNav>
+        <>
+        {session && (
+            <StyledNav>
+                <StyledLink href="/">
+                    My Profile
+                </StyledLink>
+                <StyledLink href="/add">
+                    Add App
+                </StyledLink>
+                <StyledLink href="/subscribed-apps">
+                    Subscribed Apps
+                </StyledLink>
+           </StyledNav>
+            )
+        }
+        </>        
     );
 }
