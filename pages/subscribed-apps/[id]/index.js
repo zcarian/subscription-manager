@@ -7,7 +7,7 @@ export default function DetailsPage() {
 
     
     const router = useRouter();
-    const { isReady, push,  query } = router;
+    const { isReady, push, query } = router;
     const { id } = query;
     
     const { data:app, isLoading, error } = useSWR(isReady ? `/api/subscribed-apps/${id}` : null);
@@ -19,10 +19,11 @@ export default function DetailsPage() {
 
         if (!confirmation) return;
         
+        push("/subscribed-apps");
+        
         await fetch(`/api/subscribed-apps/${id}`, {
             method: "DELETE",
         });
-        push("/subscribed-apps");
     }
 
     return (

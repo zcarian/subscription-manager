@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useSession } from 'next-auth/react';
 
 const StyledNav = styled.nav`
     display: flex;
@@ -15,9 +16,23 @@ const StyledLink = styled(Link)`
     font-weight: 600;
     `
 
+const StyledDiv = styled.div`
+    color: #fff;    
+    font-size: 1.2rem;
+    font-weight: 600;
+    `
+    
 export default function NavBar() {
+
+  const { data: session } = useSession()
+
     return (
         <StyledNav>
+            {session && (
+                <StyledDiv>
+                    Signed in as {session.user.name}
+                </StyledDiv>
+            )}
             <StyledLink href="/">
                 Home
             </StyledLink>
