@@ -35,6 +35,7 @@ export default function Form({ onSubmit, appData }) {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedAppData, setSearchedAppData] = useState([]);
+  const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
 
 
   useEffect(() => {
@@ -102,6 +103,7 @@ export default function Form({ onSubmit, appData }) {
       [name]: value,
     }));
     setSearchTerm(value);
+    setIsSuggestionsOpen(true);
   };
 
   const handleSuggestionClick = (suggestion) => {
@@ -110,7 +112,7 @@ export default function Form({ onSubmit, appData }) {
       name: suggestion.name,
       icon: suggestion.icon,
     }));
-    // console.log(formData);
+    setIsSuggestionsOpen(false);
   };
 
   function handleSubmit(event) {
@@ -123,7 +125,7 @@ export default function Form({ onSubmit, appData }) {
       <Label htmlFor="name">Name</Label>
       <input type="text" id="name" name="name" value={formData.name} onChange={handleNameChange} required/>
 
-      {searchedAppData && searchTerm !== "" && (
+      {isSuggestionsOpen && searchedAppData && searchTerm !== "" && (
         <ul>
         {searchedAppData.map((suggestion, index) => (
           <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
@@ -144,11 +146,6 @@ export default function Form({ onSubmit, appData }) {
         <option value="GBP">GBP</option>
       </select>
 
-      <Label htmlFor="startDate">Start Date</Label>
-      <input type="date" id="startDate" name="startDate" onChange={handleInputChange} value={formData.startDate} required />
-
-      <Label htmlFor="endDate">End Date</Label>
-      <input type="date" id="endDate" name="endDate" onChange={handleInputChange} value={formData.endDate} />
 
       <Label htmlFor="renewPeriod">Renew Period</Label>
       <select id="renewPeriod" name="renewPeriod" onChange={handleInputChange} value={formData.renewPeriod} required>
@@ -160,7 +157,13 @@ export default function Form({ onSubmit, appData }) {
       </select>
       {formData.renewPeriod === "" && (
         <input type="text" id="renewPeriod" name="renewPeriod" placeholder="" onChange={handleInputChange} value={formData.renewPeriod} />
-      )}
+        )}
+
+      <Label htmlFor="startDate">Start Date</Label>
+      <input type="date" id="startDate" name="startDate" onChange={handleInputChange} value={formData.startDate} required />
+  
+      <Label htmlFor="endDate">End Date</Label>
+      <input type="date" id="endDate" name="endDate" onChange={handleInputChange} value={formData.endDate} />
 
       <StyledButton type="submit">{appData ? "Edit app" : "Add app"}</StyledButton>
     </FormContainer>

@@ -1,29 +1,21 @@
 import useSWR from 'swr';
-import AppPreview from '../../components/AppPreview/AppPreview';
+import AppList from '../../components/AppList/AppList';
 
 export default function SubscribedAppsPage() {
-    const { data } = useSWR('/api/subscribed-apps');
+    const { data, isLoading } = useSWR('/api/subscribed-apps');
 
-    // console.log("data in subscribed-apps/index.js", data);
-    
     const apps = data?.apps
 
-    // console.log("apps in subscribed-apps/index.js", apps);
+    if (isLoading) return <div>Loading...</div>;
 
     if (!data) return <div>Please log in.</div>;
+
 
     if(data.apps.length === 0) return <div>You have no subscribed apps.</div>
     
     return (
         <div>
-            <h1>Subscribed Apps</h1>
-            <ul>
-                {apps.map((app) => (
-                    <li key={app._id}>
-                        <AppPreview app={app} />
-                    </li>
-                ))}
-            </ul>
+            <AppList apps={apps}/>
         </div>
     );
 }

@@ -2,6 +2,8 @@ import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import NavBar from "../components/NavBar/index.js";
 import { SessionProvider } from "next-auth/react"
+import LabelBottomNavigation  from "../components/BottomNav/BottomNav";
+import ResponsiveAppBar from "../components/AppBar/AppBar.js";
 
 export default function App({
   Component,
@@ -20,7 +22,8 @@ export default function App({
         },
       }}
     > 
-      <NavBar/>
+      <ResponsiveAppBar/>
+      <LabelBottomNavigation position="fixed"/>
       <GlobalStyle />
       <Component {...pageProps} />    
     </SWRConfig>
