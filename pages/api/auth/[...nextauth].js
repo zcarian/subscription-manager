@@ -20,7 +20,7 @@ export const authOptions = {
   callbacks: {
     async signIn(user, account, session) {
       user.user.apps = [];  
-      console.log("user in signIn:", user);
+      // console.log("user in signIn:", user);
       user.user.accessToken = user.account.access_token;
       // console.log("token:", user.account.access_token)
       // console.log("session in signIn:", session);

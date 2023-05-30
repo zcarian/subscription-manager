@@ -11,25 +11,25 @@ import { useRouter } from 'next/router';
 export default function AppList({apps}) {
     const { push } = useRouter();
   return (
-    <List sx={{ width: '100%', bgcolor: 'yellow'}} position='sticky'>
+    <List sx={{ width: '100%', bgcolor: 'yellow', paddingTop:0}} position='sticky'>
         {apps.map((app, index) => (
             <React.Fragment>
-                <ListItem alignItems="flex-start" onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
+                <ListItem alignItems="center" onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
                 <ListItemAvatar>
                     <Avatar alt={app.name} src={app.icon} />
                 </ListItemAvatar>
-                <ListItemText
+                <ListItemText sx={{alignItems:'center'}}
                     primary={app.name}
-                    secondary={
-                        <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                        >
-                            Started on {app.startDate} {app.endDate && `and ends on ${app.endDate}`}
-                        </Typography>             
-                    }
+                    // secondary={
+                    //     <Typography
+                    //         sx={{ display: 'inline' }}
+                    //         component="span"
+                    //         variant="body2"
+                    //         color="text.primary"
+                    //     >
+                    //         Started on {app.startDate} {app.endDate && `and ends on ${app.endDate}`}
+                    //     </Typography>             
+                    // }
                 />
                 <ListItemText
                     primary={`${app.price} ${app.currency}`}
@@ -37,7 +37,7 @@ export default function AppList({apps}) {
                     sx={{ textAlign: 'right'}}
                 />
                 </ListItem>
-                <Divider variant="inset" component="li" />
+                <Divider variant="middle" component="li" />
             </React.Fragment>
         ))}
         {/* <ListItem  alignItems="flex-start">

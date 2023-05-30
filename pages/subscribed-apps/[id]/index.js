@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router.js';
 import useSWR from 'swr';
 import AppDetails from '../../../components/AppDetails/AppDetails';
-import Link from 'next/link';
 
 export default function DetailsPage() {
 
@@ -14,7 +13,7 @@ export default function DetailsPage() {
     
     if (!isReady || isLoading || error) return <h2>Loading...</h2>;
     
-    async function deleteApp() {
+    async function handleDeleteApp() {
         const confirmation = confirm("Are you sure you want to delete this app?");
 
         if (!confirmation) return;
@@ -28,9 +27,7 @@ export default function DetailsPage() {
 
     return (
         <div>
-            <AppDetails app={app} />
-            <button onClick={deleteApp} type='button'>Delete</button>
-            <Link href={`/subscribed-apps/${id}/edit`}>Edit</Link>            
+            <AppDetails app={app} deleteApp={handleDeleteApp}/>          
         </div>
     );
 }
