@@ -1,26 +1,37 @@
-import { useSession, signIn, signOut } from "next-auth/react"
-export default function Component() {
+import { useState } from 'react';
+import Image from 'next/image';
 
-  const { data: session } = useSession()
+export default function Home() {
+    const [apps, setApps] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
 
-  // console.log(session)
+    const fetchApps = async () => {
+        const response = await fetch(`/api/test?term=${searchTerm}&num=1`);
+        const data = await response.json();
+        setApps(data);
+    };
 
-  if (session) {
+    const handleSearchTermChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSearchClick = () => {
+        fetchApps();
+    };
+
+    console.log(apps);
     return (
-      <>
-        <h3>
-          <img src={session.user.image} style={{width: '100px', borderRadius: '50%'}} />
-          Signed in as {session.user.name}
-        </h3> 
-        <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
-  return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
-  )
+        <div>
+            <input type="text" value={searchTerm} onChange={handleSearchTermChange} />
+            <button onClick={handleSearchClick}>Search</button>
+            <ul>
+                {apps.map((app, index) => (
+                    <li key={index}>
+                      {app.title}
+                      <Image src={app.icon} alt={app.title} width={100} height={100} />
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }

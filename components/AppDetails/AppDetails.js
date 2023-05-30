@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import { useRouter } from "next/router";
 import Buttom from '@mui/material/Button';
 import { Typography } from '@mui/material';
+import Image from 'next/image';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,10 +25,11 @@ export default function BasicGrid({app, deleteApp}) {
       <Typography sx={{textAlign:'center'}}><h3>{app.name}</h3></Typography>
       <Grid container spacing={2}>
         <Grid item xs={4} >
-            <Avatar 
+            <Image 
                 src={app.icon} 
                 alt={app.name} 
-                sx={{ width: 60, height: 60, }}
+                width={100} 
+                height={100}
             />
             {/* <Avatar 
                 src={app.icon} 

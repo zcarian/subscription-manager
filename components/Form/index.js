@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const FormContainer = styled.form`
   display: flex;
@@ -41,39 +42,10 @@ export default function Form({ onSubmit, appData }) {
   useEffect(() => {
     const fetchAppData = async () => {
       try {
-        const response = await fetch(`/api/proxy?searchTerm=${encodeURIComponent(searchTerm)}`);
-
-        if (!response.ok) {
-          throw new Error('Error fetching app data');
-        }
-
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const body = doc.querySelector('body');
-
-        let appLink, appIcon, appName;
-
-        if (body.querySelector('.DxDVjd')) {
-          appLink = body.querySelector('.DxDVjd');
-          appIcon = appLink.querySelector('img').getAttribute('src');
-          appName = appLink.querySelector('.vWM94c').textContent;
-          setSearchedAppData([{ name: appName, icon: appIcon }]);
-        } else {
-          const appLinks = body.querySelectorAll('.fUEl2e .j2FCNc');
-  
-          const appList = Array.from(appLinks) 
-            .slice(0, 5)
-            .map((appLink) => {
-              appIcon = appLink.querySelector('img').getAttribute('src');
-              appName = appLink.querySelector('.DdYX5').textContent;
-  
-              return { name: appName, icon: appIcon };
-            });
-  
-          setSearchedAppData(appList);
-        }
-      } catch (error) {
+        const response = await fetch(`/api/test?term=${searchTerm}&num=1`);
+        const data = await response.json();
+        setSearchedAppData(data);
+      }catch (error) {
         console.error(error);
         setSearchedAppData([]);
       } 
@@ -85,7 +57,7 @@ export default function Form({ onSubmit, appData }) {
     }
   }, [searchTerm]);
 
-
+  console.log('searchedAppData:',searchedAppData);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -109,7 +81,7 @@ export default function Form({ onSubmit, appData }) {
   const handleSuggestionClick = (suggestion) => {
     setFormData((prevData) => ({
       ...prevData,
-      name: suggestion.name,
+      name: suggestion.title,
       icon: suggestion.icon,
     }));
     setIsSuggestionsOpen(false);
@@ -129,8 +101,9 @@ export default function Form({ onSubmit, appData }) {
         <ul>
         {searchedAppData.map((suggestion, index) => (
           <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-            {suggestion.name} 
-            {suggestion.icon && <img src={suggestion.icon} alt={suggestion.name} /> }
+            {suggestion.title} 
+            {suggestion.icon && <Image src={suggestion.icon} alt="halo" height={100}
+            width={100}/> }
           </li>
         ))}
       </ul>
