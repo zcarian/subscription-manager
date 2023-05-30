@@ -1,19 +1,20 @@
 import { useState } from 'react';
+import AppList from '../../components/AppList/AppList';
 
 export default function ScanEmailPage() {
-  const [email, setEmail] = useState('');
+  const [emailData, setEmailData] = useState('');
 
   const handleScan = async () => {
     const response = await fetch('/api/scan');
     const data = await response.json();
-    setEmail(data);
+    setEmailData(data);
   };
 
-    console.log("email", email);
+    // console.log("email", email);
   return (
     <div>
       <button onClick={handleScan}>Scan for subscriptions</button>
-      <p>halo</p>
+      {emailData && <AppList apps={emailData} />}
     </div>
   );
 }

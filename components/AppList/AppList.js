@@ -5,7 +5,6 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/router';
 
 export default function AppList({apps}) {
@@ -14,7 +13,7 @@ export default function AppList({apps}) {
     <List sx={{ width: '100%', bgcolor: 'yellow', paddingTop:0}} position='sticky'>
         {apps.map((app, index) => (
             <React.Fragment>
-                <ListItem alignItems="center" onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
+                <ListItem alignItems="center" key={index} onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
                 <ListItemAvatar>
                     <Avatar alt={app.name} src={app.icon} />
                 </ListItemAvatar>

@@ -13,15 +13,22 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
-      scope: "https://www.googleapis.com/auth/gmail.readonly",
-    })
+      authorization: {
+        params: {
+          scope: "openid https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
+    })  
   ],
   callbacks: {
     async signIn(user, account, session) {
       user.user.apps = [];  
-      // console.log("user in signIn:", user);
+      console.log("user in signIn:", user);
       user.user.accessToken = user.account.access_token;
+      user.user.refreshToken = user.account.refresh_token;
       // console.log("token:", user.account.access_token)
       // console.log("session in signIn:", session);
       // console.log("account in signIn:", account);
@@ -30,7 +37,8 @@ export const authOptions = {
     },
     async session({session, user, token, account}) {
       session.user.id = user.id;
-      session.user.accessToken = user.accessToken;
+      session.user.accessToken = user.accessToken; 
+      session.user.refreshToken = user.refreshToken;
       // console.log("account in session:", account);
       // console.log("session in session:", session);
       // console.log("user in session:", user);
