@@ -81,6 +81,7 @@ export default async function handler(req, res) {
                                 name: name,
                                 price: price,
                                 startDate: startDate,
+                                endDate : "",
                                 renewPeriod: renewPeriod,
                                 currency : "PLN",
                             }
