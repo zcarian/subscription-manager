@@ -33,6 +33,7 @@ export default function Form({ onSubmit, appData }) {
     endDate: '',
     renewPeriod: 'daily',
     icon: '',
+    category: 'Entertainment',
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedAppData, setSearchedAppData] = useState([]);
@@ -114,11 +115,22 @@ export default function Form({ onSubmit, appData }) {
 
       <Label htmlFor="currency">Currency</Label>
       <select id="currency" name="currency" onChange={handleInputChange} value={formData.currency} required>
+        <option value="PLN">PLN</option>
         <option value="EUR">EUR</option>
         <option value="USD">USD</option>
         <option value="GBP">GBP</option>
       </select>
 
+      <Label htmlFor="category">Category</Label>
+      <select id="category" name="category" onChange={handleInputChange} value={formData.category} required>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Education">Education</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Productivity">Productivity</option>
+        <option value="Finance">Finance</option>
+        <option value="Music">Music</option>
+        <option value="Other">Other</option>
+      </select>
 
       <Label htmlFor="renewPeriod">Renew Period</Label>
       <select id="renewPeriod" name="renewPeriod" onChange={handleInputChange} value={formData.renewPeriod} required>

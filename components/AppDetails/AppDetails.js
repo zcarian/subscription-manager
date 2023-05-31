@@ -45,7 +45,7 @@ export default function BasicGrid({app, deleteApp}) {
           {`${app.endDate && `and ends on ${app.endDate}`} `}
           </Typography>
           <Typography sx={{fontSize:'large'}}>
-          {`${app.price} ${app.currency} piad ${app.renewPeriod}`}
+          {`${app.price} ${app.currency} paid ${app.renewPeriod}`}
           </Typography>
         </Grid>
         <Grid item xs={3} sx={{textAlign:'center'}}>

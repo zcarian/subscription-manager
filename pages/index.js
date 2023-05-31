@@ -1,22 +1,24 @@
-import { useSession, signIn, signOut } from "next-auth/react"
-import  LabelBottomNavigation  from "../components/BottomNav/BottomNav";
-import ResponsiveAppBar from "../components/AppBar/AppBar";
+import { useSession, signIn} from "next-auth/react"
+import useSWR from 'swr';
+import DonutChart from "../components/DonutChart";
+import ColumnChart from "../components/ColumnChart";
+import ChartMenu from "../components/ChartMenu";
 
 export default function Home() {
+  const { data, isLoading } = useSWR('/api/subscribed-apps');
 
   const { data: session } = useSession()
-  console.log('Session:', session);
   if (session) {
+
     return (
       <>
-        {/* <AppBar/> */}
         <h3>
           <img src={session.user.image} style={{width: '100px', borderRadius: '50%'}} />
           Signed in as {session.user.name}
-        </h3> 
-        <br />
-        <button onClick={() => signOut()}>Sign out</button>
-        <LabelBottomNavigation />
+        </h3>
+        {/* <DonutChart data={data}/>
+        <ColumnChart data={data}/> */}
+        <ChartMenu data={data}/>
       </>
     )
   }

@@ -10,6 +10,7 @@ const appSchema = new Schema({
     startDate: { type: String, required: true },
     endDate: { type: String },
     renewPeriod: { type: String, required: true},
+    category: { type: String, required: true },
 });
 
 const App = mongoose.models.App || mongoose.model("App", appSchema);
