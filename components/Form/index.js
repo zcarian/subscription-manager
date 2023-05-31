@@ -115,6 +115,7 @@ export default function Form({ onSubmit, appData }) {
 
       <Label htmlFor="currency">Currency</Label>
       <select id="currency" name="currency" onChange={handleInputChange} value={formData.currency} required>
+        <option value="PLN">PLN</option>
         <option value="EUR">EUR</option>
         <option value="USD">USD</option>
         <option value="GBP">GBP</option>
