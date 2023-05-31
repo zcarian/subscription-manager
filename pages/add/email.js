@@ -32,6 +32,7 @@ export default function ScanEmailPage() {
       if(searcheData.length > 0) {
       console.log(searcheData[0]);
       app.icon = searcheData[0].icon;
+      app.category = searcheData[0].primaryGenre;
       console.log('app:',app);
       }
     }
