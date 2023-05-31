@@ -4,6 +4,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import AppsIcon from '@mui/icons-material/Apps';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -29,6 +30,11 @@ export default function LabelBottomNavigation() {
         label="Add"
         value="add"
         icon={<AddCircleIcon />}
+      />
+      <BottomNavigationAction
+        label="Calendar"
+        value="calendar"
+        icon={<CalendarMonthIcon/>}
       />
       <BottomNavigationAction
         label="Profile"
