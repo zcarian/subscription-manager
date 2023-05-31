@@ -1,37 +1,18 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import useSWR from 'swr';
+import AppCalendar from '../../components/Calendar';
 
 export default function Home() {
-    const [apps, setApps] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
 
-    const fetchApps = async () => {
-        const response = await fetch(`/api/test?term=${searchTerm}&num=1`);
-        const data = await response.json();
-        setApps(data);
-    };
+    const { data, isLoading } = useSWR('/api/subscribed-apps');
 
-    const handleSearchTermChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
+    const apps = data?.apps
+    // console.log('apps:',apps)
 
-    const handleSearchClick = () => {
-        fetchApps();
-    };
+    if (isLoading) return <div>Loading...</div>;
 
-    console.log(apps);
     return (
-        <div>
-            <input type="text" value={searchTerm} onChange={handleSearchTermChange} />
-            <button onClick={handleSearchClick}>Search</button>
-            <ul>
-                {apps.map((app, index) => (
-                    <li key={index}>
-                      {app.title}
-                      <Image src={app.icon} alt={app.title} width={100} height={100} />
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <AppCalendar apps={apps} />
     );
 }
