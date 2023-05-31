@@ -10,5 +10,7 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
+    /* padding-bottom: 56px // height of the bottom nav */
+    margin-bottom: 56px;
   }
 `;

@@ -1,15 +1,61 @@
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
 import { useRouter } from "next/router";
+import Buttom from '@mui/material/Button';
+import { Typography } from '@mui/material';
 
-export default function AppDetails({app}) {
-    const router = useRouter();
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
-    return (
-        <div>
-            <img src={app.icon} alt={`${app.name} icon`}/>
-            <h1>{app.name}</h1>
-            <h2>{app.price} {app.currency} piad {app.renewPeriod}</h2>
-            <p>Started on: {app.startDate} {app.endDate ?`finish on: ${app.endDate}`:""}</p>
-            <button onClick={() => router.push("/subscribed-apps/")}>Back</button>
-        </div>
-    );
+export default function BasicGrid({app, deleteApp}) {
+    const {push} = useRouter();
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Typography sx={{textAlign:'center'}}><h3>{app.name}</h3></Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={4} >
+            <Avatar 
+                src={app.icon} 
+                alt={app.name} 
+                sx={{ width: 60, height: 60, }}
+            />
+            {/* <Avatar 
+                src={app.icon} 
+                alt={app.name} 
+                sx={{ width: 60, height: 60, }}
+            /> */}
+        </Grid>
+        <Grid item xs={8} sx={{fontSize:'large'}}>         
+          <Typography>
+          {`Started on ${app.startDate}`}
+          </Typography>
+          <Typography>
+          {`${app.endDate && `and ends on ${app.endDate}`} `}
+          </Typography>
+          <Typography sx={{fontSize:'large'}}>
+          {`${app.price} ${app.currency} piad ${app.renewPeriod}`}
+          </Typography>
+        </Grid>
+        <Grid item xs={3} sx={{textAlign:'center'}}>
+          <Buttom variant='contained' onClick={deleteApp} >Delete</Buttom>
+        </Grid>
+        <Grid item xs={3} sx={{textAlign:'center'}}>
+          <Buttom variant='contained' onClick={()=>{push(`/subscribed-apps/${app._id}/edit`)}}>Edit</Buttom>
+        </Grid>
+        <Grid item xs={6} sx={{textAlign:'center'}}>
+            <Buttom variant='contained'>How to unsubscribe</Buttom>
+        </Grid>    
+      </Grid>
+    </Box>
+  );
 }

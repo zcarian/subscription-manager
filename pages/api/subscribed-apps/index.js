@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
     const session = await getServerSession( req, res, authOptions );
     
-    console.log("session in api/subscribed-apps/index.js", session);
+    // console.log("session in api/subscribed-apps/index.js", session);
 
     if(!session){
         return res.status(401).json({error: "You are not logged in"});

@@ -1,4 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react"
+import  LabelBottomNavigation  from "../components/BottomNav/BottomNav";
+import ResponsiveAppBar from "../components/AppBar/AppBar";
 
 export default function Home() {
 
@@ -7,12 +9,14 @@ export default function Home() {
   if (session) {
     return (
       <>
+        {/* <AppBar/> */}
         <h3>
           <img src={session.user.image} style={{width: '100px', borderRadius: '50%'}} />
           Signed in as {session.user.name}
         </h3> 
         <br />
         <button onClick={() => signOut()}>Sign out</button>
+        <LabelBottomNavigation />
       </>
     )
   }
