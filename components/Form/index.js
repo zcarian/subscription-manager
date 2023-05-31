@@ -33,7 +33,7 @@ export default function Form({ onSubmit, appData }) {
     endDate: '',
     renewPeriod: 'daily',
     icon: '',
-    category: '',
+    category: 'Entertainment',
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedAppData, setSearchedAppData] = useState([]);
