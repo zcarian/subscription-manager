@@ -23,13 +23,13 @@ export default function DonutChart({data}) {
         switch(obj.renewPeriod) {
             case "yearly":
                 price = price / 12;
-                break;
+            break;
             case "weekly":
                 price = price * 4;
-                break;
+            break;
             case "daily":
                 price = price * 30;
-                break;
+            break;
             default:
                 price = price;            
         }
