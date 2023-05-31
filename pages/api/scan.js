@@ -3,6 +3,21 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 import nextBase64 from 'next-base64';
 
+let monthMap = {
+    sty: '01',
+    lut: '02',
+    mar: '03',
+    kwi: '04',
+    maj: '05',
+    cze: '06',
+    lip: '07',
+    sie: '08',
+    wrz: '09',
+    paź: '10',
+    lis: '11',
+    gru: '12'
+  };  
+
 export default async function handler(req, res) {
 
     const session = await getServerSession( req, res, authOptions );
@@ -71,9 +86,11 @@ export default async function handler(req, res) {
     
                             let name = matchForName[1].trim();
                             let price = matchForPrice[1].trim();
-                            let startDate = matchForStartDate[1].trim();
+                            let startDateBeforeFormating = matchForStartDate[1].trim();
                             let renewPeriod = matchForRenewPeriod[1].trim();
-    
+                            let startDate = startDateBeforeFormating.replace(/(\d{1,2}) (\w{3}) (\d{4})/g, function(match, p1, p2, p3) {
+                                return `${p3}-${monthMap[p2]}-${p1.padStart(2, '0')}`;
+                              });
                             if (renewPeriod === "miesiąc") renewPeriod = "monthly";
                             renewPeriod==="miesiąć" ? renewPeriod = "monthly" : (renewPeriod==="rok" ? renewPeriod = "yearly": renewPeriod);
     
