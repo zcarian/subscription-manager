@@ -11,7 +11,7 @@ const CalendarComponent = ({ apps }) => {
 
   function handleEventClick(info) {
 
-    console.log(info.event.id);
+    console.log('id',info);
     push(`/subscribed-apps/${info.event.id}`);
   }
 
@@ -37,43 +37,53 @@ function renderEventContent(eventInfo) {
 
 
 
-// Transform data function
 function transformData(apps) {
-    const events = [];
-  
-    apps.forEach(app => {
-      const { name, icon, startDate, _id, renewPeriod } = app;
-      const start = new Date(startDate);
-      const title = name;
-      const id = _id;
-  
-      // Determine the number of months to add based on renewPeriod
-      const monthsToAdd = renewPeriod === 'monthly' ? 1 : 12;
-  
-      // Initialize nextRenewalDate as the startDate
-      let nextRenewalDate = new Date(start);
-  
-      // Get the date two months from now
-      const twoMonthsFromNow = new Date();
-      twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);
-  
-      // Loop until nextRenewalDate is more than two months in the future
-      while (nextRenewalDate <= twoMonthsFromNow) {
-        // Create an event for nextRenewalDate
-        events.push({
-          title,
-          start: new Date(nextRenewalDate),  // create a new Date object to avoid mutation
-          icon,
-          id
-        });
-  
-        // Add monthsToAdd to nextRenewalDate
-        nextRenewalDate.setMonth(nextRenewalDate.getMonth() + monthsToAdd);
-      }
-    });
-  
-    return events;
-  };
+  const currentDate = new Date();
+  const twoMonthsFromNow = new Date();
+  twoMonthsFromNow.setMonth(currentDate.getMonth() + 2);
+
+  let events = [];
+
+  apps.forEach((app) => {
+    let startDate = new Date(app.startDate);
+
+    // Determine the number of days to add based on the renewal period
+    let daysToAdd;
+    switch (app.renewPeriod) {
+      case 'weekly':
+        daysToAdd = 7;
+        break;
+      case 'monthly':
+        daysToAdd = 30;
+        break;
+      case 'yearly':
+        daysToAdd = 365;
+        break;
+      case 'daily':
+        daysToAdd = 1;
+        break;
+      default:
+        console.error(`Unknown renew period: ${app.renewPeriod}`);
+        return;
+    }
+
+    // Add events for each renew period until two months from now
+    while (startDate < twoMonthsFromNow) {
+      events.push({
+        title: app.name,
+        start: startDate.toISOString(),
+        icon: app.icon,
+        id: app._id,
+      });
+
+      // Add the appropriate number of days to the start date
+      startDate.setDate(startDate.getDate() + daysToAdd);
+    }
+  });
+
+  return events;
+}
+
   
   
 
