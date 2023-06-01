@@ -3,9 +3,9 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
+import UnsubscribeButton from '../UnsubscribeButton/UnsubscribeButton';
 import { useRouter } from "next/router";
-import Buttom from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
 
@@ -49,13 +49,13 @@ export default function BasicGrid({app, deleteApp}) {
           </Typography>
         </Grid>
         <Grid item xs={3} sx={{textAlign:'center'}}>
-          <Buttom variant='contained' onClick={deleteApp} >Delete</Buttom>
+          <Button variant='contained' onClick={deleteApp} >Delete</Button>
         </Grid>
         <Grid item xs={3} sx={{textAlign:'center'}}>
-          <Buttom variant='contained' onClick={()=>{push(`/subscribed-apps/${app._id}/edit`)}}>Edit</Buttom>
+          <Button variant='contained' onClick={()=>{push(`/subscribed-apps/${app._id}/edit`)}}>Edit</Button>
         </Grid>
         <Grid item xs={6} sx={{textAlign:'center'}}>
-            <Buttom variant='contained'>How to unsubscribe</Buttom>
+          <UnsubscribeButton appName={app.name}/>
         </Grid>    
       </Grid>
     </Box>
