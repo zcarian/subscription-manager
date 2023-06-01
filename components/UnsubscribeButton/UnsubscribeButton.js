@@ -14,7 +14,7 @@ function UnsubscribeButton({appName}) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: `tell me in simple steps how to unsubscribe from ${appName}`
+          prompt: `Please outline a detailed, step-by-step guide on the process of canceling a subscription to ${appName}. The steps should be straightforward, precise, and devoid of any superfluous details. Give only senteces without numbers or bullet points.`
         }),
       });
 
