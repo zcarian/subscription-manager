@@ -22,24 +22,24 @@ export default function ScanEmailPage() {
   }
 
   const handleScan = async () => {
-    const response = await fetch('/api/scan');
+    const response = await fetch('/api/email');
     const data = await response.json();
     for (let app of data) {
       let searchTerm = app.name.match(/^(\w+)/)[0];
-      console.log(searchTerm);
+      // console.log(searchTerm);
       const response = await fetch(`/api/test?term=${searchTerm}&num=1`);
       const searcheData = await response.json();
       if(searcheData.length > 0) {
-      console.log(searcheData[0]);
+      // console.log(searcheData[0]);
       app.icon = searcheData[0].icon;
       app.category = searcheData[0].primaryGenre;
-      console.log('app:',app);
+      // console.log('app:',app);
       }
     }
     setEmailData(data);
   };
 
-    console.log("email", emailData);
+    // console.log("email", emailData);
   return (
     <div>
       <button onClick={handleScan}>Scan for subscriptions</button>

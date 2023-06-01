@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { useForm, useFetchAppData, useSuggestions } from "../../hooks/useForm";
 
 const FormContainer = styled.form`
   display: flex;
@@ -25,7 +26,8 @@ const StyledButton = styled.button`
   `
 
 export default function Form({ onSubmit, appData }) {
-  const [formData, setFormData] = useState( appData || {
+  const [searchTerm, setSearchTerm] = useState('');
+  const { formData, handleInputChange, setFormData } = useForm(appData || {
     name: '',
     price: '',
     currency: 'EUR',
@@ -35,39 +37,9 @@ export default function Form({ onSubmit, appData }) {
     icon: '',
     category: 'Entertainment',
   });
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchedAppData, setSearchedAppData] = useState([]);
-  const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
 
-
-  useEffect(() => {
-    const fetchAppData = async () => {
-      try {
-        const response = await fetch(`/api/test?term=${searchTerm}&num=1`);
-        const data = await response.json();
-        setSearchedAppData(data);
-      }catch (error) {
-        console.error(error);
-        setSearchedAppData([]);
-      } 
-    };
-    if (searchTerm) {
-      fetchAppData();
-    } else {
-      setSearchedAppData([]);
-    }
-  }, [searchTerm]);
-
-  console.log('searchedAppData:',searchedAppData);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    console.log(formData);
-  };
+  const searchedAppData = useFetchAppData(searchTerm);
+  const { isSuggestionsOpen, setIsSuggestionsOpen } = useSuggestions();
 
   const handleNameChange = (e) => {
     const { name, value } = e.target;
@@ -92,11 +64,10 @@ export default function Form({ onSubmit, appData }) {
     event.preventDefault();
     onSubmit(formData);
   }
-
   return (
     <FormContainer aria-labelledby="add-new-app" onSubmit={handleSubmit}>
       <Label htmlFor="name">Name</Label>
-      <input type="text" id="name" name="name" value={formData.name} onChange={handleNameChange} required/>
+      <input type="text" id="name" name="name" value={formData.name} onChange={handleNameChange} autoComplete="off" required/>
 
       {isSuggestionsOpen && searchedAppData && searchTerm !== "" && (
         <ul>
