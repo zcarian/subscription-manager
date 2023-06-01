@@ -1,7 +1,5 @@
 import { useSession, signIn} from "next-auth/react"
 import useSWR from 'swr';
-import DonutChart from "../components/DonutChart";
-import ColumnChart from "../components/ColumnChart";
 import ChartMenu from "../components/ChartMenu";
 
 export default function Home() {
@@ -16,8 +14,6 @@ export default function Home() {
           <img src={session.user.image} style={{width: '100px', borderRadius: '50%'}} />
           Signed in as {session.user.name}
         </h3>
-        {/* <DonutChart data={data}/>
-        <ColumnChart data={data}/> */}
         <ChartMenu data={data}/>
       </>
     )

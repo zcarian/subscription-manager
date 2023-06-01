@@ -15,26 +15,25 @@ export default async function handler(req, res) {
         return res.status(401).json({error: "You are not logged in"});
     }
 
-
     if(req.method === "GET"){
         const user = await User.findOne({ _id: session.user.id });
         return res.status(200).json(user);
         
     } else if (req.method === "POST") {
-      try {
-          const appData = req.body;
-          const app = new App(appData);
+        try {
+            const appData = req.body;
+            const app = new App(appData);
           
-          const user = await User.findOne({ _id: session.user.id })
+            const user = await User.findOne({ _id: session.user.id })
 
-          user.apps.push(app);
+            user.apps.push(app);
 
-          await user.save();
+            await user.save();
   
-          res.status(201).json({ success: "App created successfully" });
-      } catch (error) {
-          console.log(error);
-          res.status(400).json({ error: error.message });
-      }
-  }
+            res.status(201).json({ success: "App created successfully" });
+        } catch (error) {
+            console.log(error);
+            res.status(400).json({ error: error.message });
+        }
+    }
 }
