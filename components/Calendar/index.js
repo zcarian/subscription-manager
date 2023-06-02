@@ -14,6 +14,12 @@ export default function CalendarComponent({ apps }) {
     push(`/subscribed-apps/${info.event.id}`);
   }
 
+  const handleEventMouseEnter = (info) => {
+    // For simplicity, we'll use the browser's built-in tooltip (title attribute
+    info.el.title = `${info.event._def.title} - ${info.event.extendedProps.price} ${info.event.extendedProps.currency}`
+
+  }
+
   return (
     <FullCalendar
       plugins={[ dayGridPlugin, interactionPlugin ]}
@@ -22,6 +28,7 @@ export default function CalendarComponent({ apps }) {
       eventContent={renderEventContent}
       height={'auto'}
       eventClick={handleEventClick}
+      eventMouseEnter={handleEventMouseEnter}
     />
   )
 }

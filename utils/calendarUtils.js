@@ -33,6 +33,8 @@ export function transformData(apps) {
           start: startDate.toISOString(),
           icon: app.icon,
           id: app._id,
+          price: app.price,
+          currency: app.currency,
         });
   
         startDate.setDate(startDate.getDate() + daysToAdd);
