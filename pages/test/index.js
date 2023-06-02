@@ -1,6 +1,8 @@
-import UnsubscribeButton from "../../components/UnsubscribeButton/UnsubscribeButton";
+import { signIn } from "next-auth/react";
+
 export default function Home() {
     return (
-        <UnsubscribeButton />
+        <button onClick={()=>{signIn()}}>Sign In</button>
+
     );
 }

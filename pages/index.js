@@ -1,27 +1,44 @@
-import { useSession, signIn} from "next-auth/react"
-import useSWR from 'swr';
-import ChartMenu from "../components/ChartMenu";
+import styled from 'styled-components';
+
+const StartMenu = styled.div`
+  width: 200px;
+  height: 300px;
+  background-color: #5d6d7f;
+  border: 1px solid #000;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+`;
+
+const MenuItem = styled.div`
+  padding: 10px;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-family: 'Tahoma', sans-serif;
+  
+  &:hover {
+    background-color: #316ac5;
+  }
+`;
+
+const MenuLogo = styled.img`
+  width: 30px;
+  height: 30px;
+`;
 
 export default function Home() {
-  const { data, isLoading } = useSWR('/api/subscribed-apps');
-
-  const { data: session } = useSession()
-  if (session) {
-
     return (
-      <>
-        <h3>
-          <img src={session.user.image} style={{width: '100px', borderRadius: '50%'}} />
-          Signed in as {session.user.name}
-        </h3>
-        <ChartMenu data={data}/>
-      </>
-    )
-  }
-  return (
-      <main>
-        <h1>Please sing in</h1>  
-        <button onClick={() => signIn()}>Sign in</button>   
-      </main>
-  );
+        <></>
+        // <StartMenu>
+        //   <MenuItem>
+        //     <MenuLogo src="/path/to/logo.jpg" alt="logo" />
+        //     Program 1
+        //   </MenuItem>
+        //   <MenuItem>
+        //     <MenuLogo src="/path/to/logo.jpg" alt="logo" />
+        //     Program 2
+        //   </MenuItem>
+        //   {/* add more menu items as necessary */}
+        // </StartMenu>
+      );
 }

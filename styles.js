@@ -11,6 +11,6 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
     /* padding-bottom: 56px // height of the bottom nav */
-    margin-bottom: 56px;
+    /* margin-bottom: 40px; */
   }
 `;
