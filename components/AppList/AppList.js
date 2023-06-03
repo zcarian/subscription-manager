@@ -6,16 +6,17 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function AppList({apps}) {
     const { push } = useRouter();
   return (
-    <List sx={{ width: '100%', bgcolor: 'yellow', paddingTop:0}} position='sticky'>
+    <List sx={{ width: '100%', bgcolor: 'white', paddingTop:0}} position='sticky'>
         {apps.map((app, index) => (
             <React.Fragment>
                 <ListItem alignItems="center" key={index} onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
                 <ListItemAvatar>
-                    <Avatar alt={app.name} src={app.icon} />
+                    <Image alt={app.name} src={app.icon} height={50} width={50}/>
                 </ListItemAvatar>
                 <ListItemText sx={{alignItems:'center'}}
                     primary={app.name}
@@ -36,7 +37,7 @@ export default function AppList({apps}) {
                     sx={{ textAlign: 'right'}}
                 />
                 </ListItem>
-                <Divider variant="middle" component="li" />
+                {index+1!==apps.length && <Divider variant="middle" component="li" />}
             </React.Fragment>
         ))}
         {/* <ListItem  alignItems="flex-start">

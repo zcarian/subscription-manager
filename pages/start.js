@@ -6,7 +6,6 @@ export default function StartPage(){
     return(
         <StartMenu>
             <NavList/>
-            <LoginButton/>
         </StartMenu>
     )
 }

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Image from 'next/image'
 import { useSession } from "next-auth/react";
+import NavList from "../NavList/NavList";
+import LoginButton from "../LoginButton";
 
 const StartMenuContainer = styled.div`
     height:95vh;
@@ -48,6 +50,8 @@ export default function StartMenu({children}){
                 <ProfilePic src={image} alt="profilePic" width={50} height={50} />
                 {session && <h3 style={{marginLeft: '2vw', color: '#fff'}}>{session.user.name}</h3>}
             </ProfileContainer>
+            {/* <NavList/> */}
+            <LoginButton/>
             {children}
         </StartMenuContainer>
         </>
