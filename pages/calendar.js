@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import AppCalendar from '../components/Calendar';
+import Window from '../components/Window';
 
 export default function Home() {
 
@@ -10,6 +11,8 @@ export default function Home() {
     if (isLoading) return <div>Loading...</div>;
 
     return (
-        <AppCalendar apps={apps} />
+        <Window> 
+            <AppCalendar apps={apps} />
+        </Window>
     );
 }

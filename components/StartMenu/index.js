@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from 'next/image'
 import { useSession } from "next-auth/react";
-import NavList from "../NavList/NavList";
+import NavList from "../NavList";
 import LoginButton from "../LoginButton";
 
 const StartMenuContainer = styled.div`

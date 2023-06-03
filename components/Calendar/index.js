@@ -4,6 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; 
 import { useRouter } from 'next/router';
 import { renderEventContent, transformData } from '../../utils/calendarUtils';
+import styled from 'styled-components';
+
+const CalendarContainer = styled.div`
+  padding:3vh;
+`
 
 export default function CalendarComponent({ apps }) {
   const {push} = useRouter();
@@ -21,14 +26,17 @@ export default function CalendarComponent({ apps }) {
   }
 
   return (
-    <FullCalendar
-      plugins={[ dayGridPlugin, interactionPlugin ]}
-      initialView="dayGridMonth"
-      events={events}
-      eventContent={renderEventContent}
-      height={'auto'}
-      eventClick={handleEventClick}
-      eventMouseEnter={handleEventMouseEnter}
-    />
+    <CalendarContainer>
+
+      <FullCalendar
+        plugins={[ dayGridPlugin, interactionPlugin ]}
+        initialView="dayGridMonth"
+        events={events}
+        eventContent={renderEventContent}
+        height={'auto'}
+        eventClick={handleEventClick}
+        eventMouseEnter={handleEventMouseEnter}
+      />
+    </CalendarContainer>
   )
 }

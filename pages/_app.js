@@ -2,7 +2,7 @@ import GlobalStyle from "../styles.js";
 import { SWRConfig } from "swr";
 import NavBar from "../components/NavBar/index.js";
 import { SessionProvider } from "next-auth/react"
-import LabelBottomNavigation  from "../components/BottomNav/BottomNav";
+import LabelBottomNavigation  from "../components/BottomNav";
 import ResponsiveAppBar from "../components/AppBar/AppBar.js";
 import styled from "styled-components";
 
@@ -13,6 +13,7 @@ const Background = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding-top: 0.5vh;
 `;
 
 

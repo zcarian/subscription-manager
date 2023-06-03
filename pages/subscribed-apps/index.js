@@ -1,6 +1,6 @@
 import useSWR from 'swr';
-import AppList from '../../components/AppList/AppList';
-import Window from '../../components/Window/Window';
+import AppList from '../../components/AppList';
+import Window from '../../components/Window';
 
 const apps1 = [
     {
@@ -100,8 +100,8 @@ export default function SubscribedAppsPage() {
     if(data.apps.length === 0) return <div>You have no subscribed apps.</div>
     
     return (
-        <Window ClosePath='/'>
-            <AppList apps={apps1}/>
+        <Window closePath='/'>
+            <AppList apps={apps}/>
         </Window>
     );
 }

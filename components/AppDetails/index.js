@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
 import useFetchUnsubscribe from '../../hooks/useFetchUnsubscribe';
+import Window from '../Window';
+import styled from 'styled-components';
 
 export default function AppDetails({app, deleteApp}) {
 
@@ -14,7 +16,9 @@ export default function AppDetails({app, deleteApp}) {
   const {steps, loading, isUnsubscribeTextVisible, handleClick} = useFetchUnsubscribe();
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <>
+    <Window closePath='/'>
+    <Box sx={{ flexGrow: 1, padding: '10px'}}>
       <Typography sx={{textAlign:'center'}}><h3>{app.name}</h3></Typography>
       <Grid container spacing={2}>
         <Grid item xs={4}>
@@ -36,17 +40,19 @@ export default function AppDetails({app, deleteApp}) {
             {loading ? 'Loading...' : 'How to unsubscribe'}
           </Button>
         </Grid>
-        {isUnsubscribeTextVisible && 
-          <Grid item xs={12} sx={{textAlign:'center'}}>
-            <ul>
-              {steps?.map((step, index) => (
-                <li key={index}>{step}
-                </li>
-              ))}
-            </ul>
-          </Grid>
-        }
       </Grid>
     </Box>
+    </Window>
+    {isUnsubscribeTextVisible && 
+            <Window closePath={`/subscribed-apps/${app._id}`}>
+              <ul>
+                {steps?.map((step, index) => (
+                  <li key={index}>{step}
+                  </li>
+                ))}
+              </ul>
+            </Window>
+        }
+    </>
   );
 }

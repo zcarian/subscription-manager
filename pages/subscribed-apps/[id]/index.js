@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router.js';
 import useSWR from 'swr';
-import AppDetails from '../../../components/AppDetails/AppDetails';
+import AppDetails from '../../../components/AppDetails';
+import Window from '../../../components/Window';
 
 export default function DetailsPage() {
 
@@ -26,8 +27,6 @@ export default function DetailsPage() {
     }
 
     return (
-        <div>
-            <AppDetails app={app} deleteApp={handleDeleteApp}/>          
-        </div>
+        <AppDetails app={app} deleteApp={handleDeleteApp}/>  
     );
 }
