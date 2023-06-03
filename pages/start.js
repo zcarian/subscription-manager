@@ -1,16 +1,12 @@
-import styled from "styled-components";
 import StartMenu from "../components/StartMenu";
-
-const WhiteDiv = styled.div`
-    width: 50%;
-    height: 100%;
-    background-color: #fff;
-`
+import LoginButton from "../components/LoginButton";
+import NavList from "../components/NavList/NavList";
 
 export default function StartPage(){
     return(
         <StartMenu>
-            <WhiteDiv/>
+            <NavList/>
+            <LoginButton/>
         </StartMenu>
     )
 }

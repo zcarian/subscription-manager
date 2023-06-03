@@ -11,6 +11,7 @@ const StartMenuContainer = styled.div`
     bottom:3vh;
     border-right: 4px solid #0078D7;
     border-bottom: 8px solid #0078D7;
+    border-top-right-radius: 10px;
 `
 
 const ProfileContainer = styled.div`
@@ -24,6 +25,7 @@ const ProfileContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    border-top-right-radius: 10px;
 `
 const ProfilePic = styled(Image)`
     border: 2px solid #fff;

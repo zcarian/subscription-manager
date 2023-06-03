@@ -1,22 +1,6 @@
 import * as React from 'react';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import AppsIcon from '@mui/icons-material/Apps';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
-
-const BottomNav = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #235dda;
-  z-index: 2000;
-  display: flex;
-  `
 
 const Navbar = styled.nav`
   display: flex;
@@ -52,59 +36,12 @@ const StartButton = styled.button`
   box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.5);
 `;
 
-const NavItems = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const NavItem = styled.div`
-  margin-right: 15px;
-  cursor: pointer;
-`;
 export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState('');
   const { push } = useRouter();
-  const {data: session} = useSession();
-
-  const handleChange = (event, newValue) => {
-    console.log('newValue:', newValue);
-    push(`/${newValue}`);
-    setValue(newValue);
-  };
 
   return (
     <Navbar>
       <StartButton onClick={()=>{push('/start')}}>Start</StartButton>
-      {session && (
-        <NavItems>
-          <NavItem>NavItem 1</NavItem>
-          <NavItem>NavItem 2</NavItem>
-          <NavItem>NavItem 3</NavItem>
-        </NavItems>
-      )}
     </Navbar>
-    // <BottomNavigation sx={{ width: '100%', position: 'fixed', bottom:0, zIndex:2000, backgroundColor:'blue'}} value={value} onChange={handleChange} >
-    //   <BottomNavigationAction
-    //     sx={{backgroundColor:'green', color:'white'}}
-    //     label="Your Subscriptions"
-    //     value="subscribed-apps"
-    //     icon={<AppsIcon />}
-    //   />
-    //   <BottomNavigationAction
-    //     label="Add"
-    //     value="add"
-    //     icon={<AddCircleIcon />}
-    //   />
-    //   <BottomNavigationAction
-    //     label="Calendar"
-    //     value="calendar"
-    //     icon={<CalendarMonthIcon/>}
-    //   />
-    //   <BottomNavigationAction
-    //     label="Profile"
-    //     value=""
-    //     icon={<AccountBoxIcon/>}
-    //   />
-    // </BottomNavigation>
   );
 }
