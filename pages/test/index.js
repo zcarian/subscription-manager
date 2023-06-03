@@ -1,8 +1,19 @@
-import { signIn } from "next-auth/react";
+import Window from "../../components/Window/Window";
 
 export default function Home() {
     return (
-        <button onClick={()=>{signIn()}}>Sign In</button>
-
+        <Window>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+            <h1>Test</h1>
+        </Window>
     );
 }
