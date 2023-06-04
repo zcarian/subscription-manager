@@ -11,7 +11,7 @@ import Image from 'next/image';
 export default function AppList({apps}) {
     const { push } = useRouter();
   return (
-    <List sx={{ width: '100%', bgcolor: 'white', paddingTop:'2vh'}} position='sticky'>
+    <List sx={{ width: '100%', bgcolor: 'white', paddingTop:'2vh', paddingBottom:'-8px'}} position='sticky'>
         {apps.map((app, index) => (
             <React.Fragment>
                 <ListItem alignItems="center" key={index} onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
