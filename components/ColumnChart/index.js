@@ -1,5 +1,5 @@
 import { Chart } from "react-google-charts";
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 
 export default function ColumnChart({data}){
 
@@ -27,8 +27,15 @@ export default function ColumnChart({data}){
 
     const options = {
         vAxis: {
-            title: 'PLN',
+            title: 'Price in PLN',
         },
+        hAxis: {
+            title: 'Apps',
+            textStyle: {
+                fontSize: 14,
+            },
+        },
+        legend: 'none',
     };
 
   return (

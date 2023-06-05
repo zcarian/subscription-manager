@@ -1,6 +1,16 @@
-import UnsubscribeButton from "../../components/UnsubscribeButton/UnsubscribeButton";
-export default function Home() {
+import Window from "../../components/Window";
+import AppList from "../../components/AppList";
+import AddAppButtons from "../../components/WindowButtons";
+import Form from "../../components/Form";
+
+
+  const apps2=[]
+
+  export default function Home() {
+    
     return (
-        <UnsubscribeButton />
+      <Window>
+        <Form/>
+      </Window>
     );
 }

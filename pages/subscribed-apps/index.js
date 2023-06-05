@@ -1,5 +1,20 @@
 import useSWR from 'swr';
-import AppList from '../../components/AppList/AppList';
+import AppList from '../../components/AppList';
+import Window from '../../components/Window';
+import WindowButtons from '../../components/WindowButtons';
+
+const buttons =[
+  {
+    name:'Add new app',
+    path:'/add/form',
+    icon:'/type.png'
+  },
+  {
+    name:'Check your emails',
+    path:'/add/email',
+    icon:'/scan1.png'
+  }
+]
 
 export default function SubscribedAppsPage() {
     const { data, isLoading } = useSWR('/api/subscribed-apps');
@@ -14,8 +29,9 @@ export default function SubscribedAppsPage() {
     if(data.apps.length === 0) return <div>You have no subscribed apps.</div>
     
     return (
-        <div>
+        <Window areButtons={true} isMirrored={false} buttons={buttons}>
             <AppList apps={apps}/>
-        </div>
+            {/* <WindowButtons isMirrored={false} buttons={buttons}/> */}
+        </Window>
     );
 }

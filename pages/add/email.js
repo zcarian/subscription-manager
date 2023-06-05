@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import AppList from '../../components/AppList/AppList';
+import AppList from '../../components/AppList/';
 import { useRouter } from 'next/router';
+import Window from '../../components/Window';
 
 export default function ScanEmailPage() {
   const router = useRouter();
@@ -40,15 +41,16 @@ export default function ScanEmailPage() {
   };
 
     // console.log("email", emailData);
+  handleScan();
   return (
-    <div>
-      <button onClick={handleScan}>Scan for subscriptions</button>
-      {emailData && 
+    <Window>
+      {emailData ?( 
         <>
           <AppList apps={emailData} />
           <button onClick={addAppFromScan}>Add apps</button>
         </>
+      ):(<p>Loading...</p>)
         }
-    </div>
+    </Window>
   );
 }

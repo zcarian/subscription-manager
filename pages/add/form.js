@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next"
 import Link from "next/link";
+import Window from "../../components/Window";
 
 export default function AddEntryPage() {
     const router = useRouter();
@@ -22,13 +23,9 @@ export default function AddEntryPage() {
       }
   }
     return (
-        <main>
-            <Link href="/add">
-                Go back
-            </Link>
-            <h1>Add New App</h1>
+        <Window>
             <Form onSubmit={addApp} />
-        </main>
+        </Window>
     )
 }
 

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Form from '../../../components/Form';
+import Window from '../../../components/Window';
 
 export default function EditPage() {
 
@@ -23,8 +24,8 @@ export default function EditPage() {
         push(`/subscribed-apps/${id}`);
     }
     return (
-        <div>
+        <Window>
             <Form onSubmit={editApp} appData={appData}/>
-        </div>
+        </Window>
     )
 }
