@@ -7,9 +7,11 @@ export default function ColumnChart({data}){
         ['App', 'Price', { role: "style" }],
     ];
 
-    data?.apps.forEach((obj) => {
-        let price = parseFloat(obj.price.replace(',', '.'));
-        switch(obj.renewPeriod) {
+    const pattern = /^([\w]+\s?[\w]*)(?=\s*|\s*:|$)/;
+
+    data?.apps.forEach((app) => {
+        let price = parseFloat(app.price.replace(',', '.'));
+        switch(app.renewPeriod) {
             case "yearly":
                 price = price / 12;
             break;
@@ -22,7 +24,12 @@ export default function ColumnChart({data}){
             default:
                 price = price;
         }
-        chartData.push([obj.name, Number(price.toFixed(2)),'#' + Math.floor(Math.random()*16777215).toString(16)]);
+        let name = app.name.match(pattern);
+        // console.log(name);
+        let formatedName
+        name ? formatedName = name[0].trim() : formatedName = app.name;
+        console.log(formatedName, price)
+        chartData.push([formatedName, Number(price.toFixed(2)),'#' + Math.floor(Math.random()*16777215).toString(16)]);
     });
 
     const options = {
@@ -32,13 +39,21 @@ export default function ColumnChart({data}){
         hAxis: {
             title: 'Apps',
             textStyle: {
-                fontSize: 14,
+                fontSize: 10,
             },
         },
         legend: 'none',
+        // chartArea: { height: "50%" },
+
     };
 
   return (
-    <Chart chartType="ColumnChart" width="100%" height="400px" data={chartData} options={options} />
+    <Chart 
+     chartType="ColumnChart" 
+     width="100%" 
+     height="400px" 
+     data={chartData} 
+     options={options} 
+    />
   );
 }

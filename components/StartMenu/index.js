@@ -5,7 +5,7 @@ import NavList from "../NavList";
 import LoginButton from "../LoginButton";
 
 const StartMenuContainer = styled.div`
-    height:95vh;
+    height:55vh;
     width: 95vw;
     background-color: #d3e5fb;
     position: absolute;

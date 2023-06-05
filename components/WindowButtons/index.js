@@ -34,16 +34,15 @@ const StyledButton = styled.button`
 `
 
 export default function WindowButtons({buttons, isMirrored}){
-    const {push} = useRouter();
 
     return (
         <ButtonsContainer>
-            <StyledButton onClick={()=>{push((buttons[0].path))}}>
+            <StyledButton onClick={()=>{buttons[0].onClick()}}>
                 <Image src={buttons[0].icon} alt={`${buttons[0].name} icon`} width={40} height={40}/>
                 <p>{buttons[0].name}</p>
             </StyledButton>
             <ButtonDivider/>
-            <StyledButton onClick={()=>{push((buttons[1].path))}}>
+            <StyledButton onClick={()=>{buttons[1].onClick()}}>
                 {isMirrored?(<p>{buttons[1].name}</p>):(<></>)}
                 <Image src={buttons[1].icon} alt={`${buttons[1].name} icon`} width={40} height={40}/>
                 {isMirrored?(<></>):(<p>{buttons[1].name}</p>)}
