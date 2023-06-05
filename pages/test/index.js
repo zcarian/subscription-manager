@@ -1,16 +1,18 @@
-import Window from "../../components/Window";
-import AppList from "../../components/AppList";
-import AddAppButtons from "../../components/WindowButtons";
-import Form from "../../components/Form";
+import useSWR from 'swr';
+import BarChartComponent from '../../components/BarChart';
+import Window from '../../components/Window';
 
+export default function Home() {
 
-  const apps2=[]
+    const { data, isLoading } = useSWR('/api/subscribed-apps');
 
-  export default function Home() {
-    
+    const apps = data?.apps
+
+    if (isLoading) return <div>Loading...</div>;
+
     return (
-      <Window>
-        <Form/>
-      </Window>
+        <Window> 
+            <BarChartComponent apps={apps} />
+        </Window>
     );
 }

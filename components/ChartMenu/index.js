@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import ColumnChart from '../ColumnChart'
 import DonutChart from '../DonutChart'
+import BarChart from '../BarChart'
 
 export default function LabTabs({data}) {
   const [value, setValue] = React.useState('1');
@@ -21,10 +22,12 @@ export default function LabTabs({data}) {
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="All apps" value="1" />
             <Tab label="Average monthly spending" value="2" />
+            <Tab label="Total spending" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1"><ColumnChart data={data}/></TabPanel>
         <TabPanel value="2"><DonutChart data={data}/></TabPanel>
+        <TabPanel value="3"><BarChart data={data}/></TabPanel>
       </TabContext>
     </Box>
   );

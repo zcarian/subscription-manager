@@ -22,6 +22,8 @@ const buttons =[
 export default function (){
     const { data, isLoading } = useSWR('/api/subscribed-apps');    
 
+    if (isLoading) return <div>Loading...</div>;
+
     return (
         <Window >
             <ChartMenu data={data}/>

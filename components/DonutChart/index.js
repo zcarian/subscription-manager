@@ -47,7 +47,7 @@ export default function DonutChart({data}) {
         <Chart
             chartType="PieChart"
             width="100%"
-            height="400px"
+            height="200px"
             data={chartData}
             options={options}
         />
