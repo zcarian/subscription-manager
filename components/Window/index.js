@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import WindowButtons from "../WindowButtons";
 
 const WindowContainer = styled.div`
     display:flex;
@@ -37,7 +38,12 @@ const ActionBar = styled.div`
     border-right:  solid 5px #0078D7;
 `
 
-export default function Window({children}){
+const StyledDiv = styled.div`
+    height: 100%;
+    width: 100%;
+`
+
+export default function Window({children, areButtons, isMirrored, buttons}){
     return(
         <WindowContainer>
             <ActionBar>
@@ -45,9 +51,10 @@ export default function Window({children}){
                     <Image src='/Exit.png' alt='exit icon' height={19} width={19}/>
                 </Link>
             </ActionBar>
-            <div>
-            {children}
-            </div>
+            <StyledDiv>
+                {children}
+            </StyledDiv>
+            {areButtons && <WindowButtons isMirrored={isMirrored} buttons={buttons}/>}
         </WindowContainer>
     )
 }

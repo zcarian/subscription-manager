@@ -15,12 +15,13 @@ export default function CalendarComponent({ apps }) {
 
   const events = transformData(apps);
 
+  console.log(events);
+
   function handleEventClick(info) {
     push(`/subscribed-apps/${info.event.id}`);
   }
 
   const handleEventMouseEnter = (info) => {
-    // For simplicity, we'll use the browser's built-in tooltip (title attribute
     info.el.title = `${info.event._def.title} - ${info.event.extendedProps.price} ${info.event.extendedProps.currency}`
 
   }
