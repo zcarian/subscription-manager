@@ -44,16 +44,16 @@ apps.forEach((app) => {
 
     const maxPrice = Math.ceil(Math.max(...chartData.slice(1).map((item)=>item[1])) / 100) * 100;
 
-    console.log(maxPrice);
     const options = {
         legend: 'none',
         hAxis: {
-            // maxValue: 800,
-            title: 'Apps',
+            title: 'Total cost (PLN)',
             viewWindow: {
                 max: maxPrice,
-              },
-          },
+            },
+        },
+        title: 'Total cost of each app',
+        chartArea: { width: "50%" },
     }
 
   return (

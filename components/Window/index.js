@@ -18,6 +18,7 @@ const WindowContainer = styled.div`
     border: solid 5px #0078D7;
     border-radius: 5px;
     position:relative;
+    overflow-x:hidden;
 `
 
 const ActionBar = styled.div`

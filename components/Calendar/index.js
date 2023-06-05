@@ -15,7 +15,7 @@ export default function CalendarComponent({ apps }) {
 
   // console.log(apps);
 
-  const events = transformData(apps);
+  const events = transformData(apps, true);
 
   // console.log(events);
 

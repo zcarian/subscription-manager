@@ -10,7 +10,7 @@ const pages =[
     },
     {
         name: 'Charts',
-        path: '/charts',
+        path: '/charts/summary',
         icon:'/chart.png',
     },
     {

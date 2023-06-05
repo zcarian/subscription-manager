@@ -1,8 +1,10 @@
-export function transformData(apps) {
+export function transformData(apps, isInTwoMonths = false) {
     const currentDate = new Date();
     const twoMonthsFromNow = new Date();
     twoMonthsFromNow.setMonth(currentDate.getMonth() + 2);
   
+    const referenceDate = isInTwoMonths ? twoMonthsFromNow : currentDate;
+
     let events = [];
   
     apps.forEach((app) => {
@@ -27,7 +29,7 @@ export function transformData(apps) {
           return;
       }
   
-      while (startDate < twoMonthsFromNow) {
+      while (startDate < referenceDate) {
         events.push({
           title: app.name,
           start: startDate.toISOString(),

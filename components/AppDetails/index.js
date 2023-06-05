@@ -24,20 +24,20 @@ export default function AppDetails({app, deleteApp}) {
         <Grid item xs={4}>
           <Image src={app.icon} alt={app.name} width={100} height={100} />
         </Grid>
-        <Grid item xs={8} sx={{fontSize:'large'}}>
+        <Grid item xs={8} sx={{fontSize:'large', display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
           <Typography>{`Started on ${app.startDate}`}</Typography>
           <Typography>{`${app.endDate && `and ends on ${app.endDate}`} `}</Typography>
-          <Typography sx={{fontSize:'large'}}>{`${app.price} ${app.currency} paid ${app.renewPeriod}`}</Typography>
+          <Typography sx={{fontSize:'large', alignSelf:'end'}}>{`${app.price} ${app.currency} paid ${app.renewPeriod}`}</Typography>
         </Grid>
-        <Grid item xs={3} sx={{textAlign:'center'}}>
+        <Grid item xs={4} sx={{textAlign:'center'}}>
           <Button variant='contained' onClick={deleteApp} >Delete</Button>
         </Grid>
         <Grid item xs={3} sx={{textAlign:'center'}}>
           <Button variant='contained' onClick={()=>{push(`/subscribed-apps/${app._id}/edit`)}}>Edit</Button>
         </Grid>
-        <Grid item xs={6} sx={{textAlign:'center'}}>
+        <Grid item xs={5} sx={{textAlign:'center'}}>
           <Button variant='contained' onClick={()=>handleClick(app.name)}>
-            {loading ? 'Loading...' : 'How to unsubscribe'}
+            {loading ? 'Loading...' : 'Unsubscribe'}
           </Button>
         </Grid>
       </Grid>
@@ -45,12 +45,12 @@ export default function AppDetails({app, deleteApp}) {
     </Window>
     {isUnsubscribeTextVisible && 
             <Window closePath={`/subscribed-apps/${app._id}`}>
-              <ul>
+              <ol>
                 {steps?.map((step, index) => (
                   <li key={index}>{step}
                   </li>
                 ))}
-              </ul>
+              </ol>
             </Window>
         }
     </>

@@ -2,21 +2,29 @@ import useSWR from 'swr';
 import AppList from '../../components/AppList';
 import Window from '../../components/Window';
 import WindowButtons from '../../components/WindowButtons';
+import { useRouter } from 'next/router';
 
-const buttons =[
-  {
-    name:'Add new app',
-    path:'/add/form',
-    icon:'/type.png'
-  },
-  {
-    name:'Check your emails',
-    path:'/add/email',
-    icon:'/scan1.png'
-  }
-]
 
 export default function SubscribedAppsPage() {
+    const {push} = useRouter();
+
+    const buttons =[
+      {
+        name:'Add new app',
+        icon:'/type.png',
+        onClick(){
+          push('/add/form')
+        }
+      },
+      {
+        name:'Check your emails',
+        icon:'/scan1.png',
+        onClick(){
+          push('/add/email')
+        }
+      }
+    ]
+
     const { data, isLoading } = useSWR('/api/subscribed-apps');
 
     const apps = data?.apps
