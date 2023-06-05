@@ -28,7 +28,7 @@ const ActionBar = styled.div`
     padding-right:5px; */
     height: auto;
     background: linear-gradient(to bottom, #0078D7 0%, #4e8fe0 100%);
-    justify-content:end;
+    justify-content:space-between;
     position:fixed;
     top:2vh;
     left:2vw;
@@ -44,13 +44,25 @@ const StyledDiv = styled.div`
     width: 100%;
 `
 
-export default function Window({children, areButtons, isMirrored, buttons}){
+const Name = styled.h4`
+    color: #fff;
+    padding-right: auto;
+    /* align-self:flex-start; */
+`
+
+export default function Window({children, areButtons, isMirrored, buttons, linkBack, name}){
     return(
         <WindowContainer>
             <ActionBar>
-                <Link href='/start'>
-                    <Image src='/Exit.png' alt='exit icon' height={19} width={19}/>
-                </Link>
+                <Name style={{color: '#fff', margin:'0'}}>{name}</Name>
+                <div>
+                    <Link href={`${linkBack}`}>
+                        <Image src='/previous2.png' alt='previous icon' height={19} width={19}/>
+                    </Link>
+                    <Link href='/'>
+                        <Image src='/Exit.png' alt='exit icon' height={19} width={19}/>
+                    </Link>
+                </div>
             </ActionBar>
             <StyledDiv>
                 {children}

@@ -8,11 +8,13 @@ export default function Home() {
 
     const apps = data?.apps
 
-    if (isLoading) return <div>Loading...</div>;
+    // if (isLoading) return <div>Loading...</div>;
 
-    return (
-        <Window> 
-            <AppCalendar apps={apps} />
-        </Window>
-    );
+    if (!isLoading) {
+        return (
+            <Window name='Calendar' linkBack='/start'> 
+                <AppCalendar apps={apps} />
+            </Window>
+        );
+    }
 }

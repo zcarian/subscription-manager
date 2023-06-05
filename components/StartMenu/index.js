@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import Image from 'next/image'
 import { useSession } from "next-auth/react";
-import NavList from "../NavList";
 import LoginButton from "../LoginButton";
 
 const StartMenuContainer = styled.div`
     height:55vh;
-    width: 95vw;
+    width: 80vw;
     background-color: #d3e5fb;
     position: absolute;
     left: 0;
@@ -19,7 +18,6 @@ const StartMenuContainer = styled.div`
 const ProfileContainer = styled.div`
     width: 100%;
     height: 10vh;
-    /* background-color: #0078D7; */
     background: linear-gradient(to bottom, #0078D7 0%, #4e8fe0 100%);
     position: absolute;
     top: 0;
@@ -34,26 +32,28 @@ const ProfilePic = styled(Image)`
     height: 4rem;
     width: 4rem;
     margin-left: 2vw;
+    margin-right: 3vw;
 `
 
 export default function StartMenu({children}){
     const {data: session} = useSession();
 
-    let image = '/blankProfile.png'
-    if(session){
-        image = session.user.image
-    }
     return(
-        <>
         <StartMenuContainer>
             <ProfileContainer>
-                <ProfilePic src={image} alt="profilePic" width={50} height={50} />
-                {session && <h3 style={{marginLeft: '2vw', color: '#fff'}}>{session.user.name}</h3>}
+                <ProfilePic src=
+                    {session ? 
+                    (session.user.image) :
+                    ('/blankProfile.png')}
+                alt="profilePic" 
+                width={50} 
+                height={50} />
+                <h3 style={{marginLeft: '2vw', color: '#fff'}}>
+                    {session?(session.user.name):('Guest')}
+                </h3>
             </ProfileContainer>
-            {/* <NavList/> */}
             <LoginButton/>
             {children}
-        </StartMenuContainer>
-        </>
+        </StartMenuContainer>      
     )
 }

@@ -2,6 +2,32 @@ import { useState } from 'react';
 import AppList from '../../components/AppList/';
 import { useRouter } from 'next/router';
 import Window from '../../components/Window';
+import styled from 'styled-components';
+import Image from 'next/image';
+
+const StyledP = styled.p`
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  `
+
+const StyledButton = styled.button`
+  width: 50%;
+  text-decoration: none;
+  color: black;
+  border: none;
+  position: sticky;
+  bottom:0;  
+  left:0;
+  background-color:#d3e5fb;
+  height: 6vh;
+  border-top: 5px solid #0078D7;
+  border-left: 5px solid #0078D7;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+`
 
 export default function ScanEmailPage() {
   const router = useRouter();
@@ -43,13 +69,16 @@ export default function ScanEmailPage() {
     // console.log("email", emailData);
   handleScan();
   return (
-    <Window>
+    <Window linkBack={'/subscribed-apps'}> 
       {emailData ?( 
-        <>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'flex-end'}}>
           <AppList apps={emailData} />
-          <button onClick={addAppFromScan}>Add apps</button>
-        </>
-      ):(<p>Loading...</p>)
+          <StyledButton onClick={addAppFromScan}>
+            <Image src='/add.png' alt='add icon' width={40} height={40}/>  
+            <p>Add apps</p>
+          </StyledButton>
+        </div>
+      ):(<StyledP>Loading...</StyledP>)
         }
     </Window>
   );

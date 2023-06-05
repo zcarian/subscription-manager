@@ -23,7 +23,7 @@ export default function AddEntryPage() {
       }
   }
     return (
-        <Window>
+        <Window linkBack={'/subscribed-apps'}> 
             <Form onSubmit={addApp} />
         </Window>
     )

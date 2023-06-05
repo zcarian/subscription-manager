@@ -7,7 +7,6 @@ import ColumnChart from "../../components/ColumnChart";
 import { useRouter } from 'next/router'
 
 export default function ChartsPage() {
-  const { push } = useRouter();
   const { data, isLoading } = useSWR('/api/subscribed-apps');
   const [chartNumber, setChartNumber] = useState(0);
 
@@ -48,8 +47,14 @@ export default function ChartsPage() {
     chartComponent = <DonutChart data={data} />;
   }
 
-  return (
-    <Window areButtons={true} isMirrored={true} buttons={buttons}>
+  if(data) return (
+    <Window 
+     areButtons={true} 
+     isMirrored={true} 
+     buttons={buttons}
+     name='Charts'
+     linkBack='/start'
+    >
       {chartComponent}
     </Window>
   );

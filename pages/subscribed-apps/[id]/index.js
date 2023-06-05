@@ -12,7 +12,7 @@ export default function DetailsPage() {
     
     const { data:app, isLoading, error } = useSWR(isReady ? `/api/subscribed-apps/${id}` : null);
     
-    if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+    if (!isReady || isLoading || error) return <></>;
     
     async function handleDeleteApp() {
         const confirmation = confirm("Are you sure you want to delete this app?");

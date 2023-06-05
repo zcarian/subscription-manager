@@ -3,6 +3,14 @@ import AppList from '../../components/AppList';
 import Window from '../../components/Window';
 import WindowButtons from '../../components/WindowButtons';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+
+const StyledP = styled.p`
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  `
 
 
 export default function SubscribedAppsPage() {
@@ -29,17 +37,21 @@ export default function SubscribedAppsPage() {
 
     const apps = data?.apps
 
-    if (isLoading) return <div>Loading...</div>;
-
-    if (!data) return <div>Please log in.</div>;
-
-
-    if(data.apps.length === 0) return <div>You have no subscribed apps.</div>
-    
-    return (
-        <Window areButtons={true} isMirrored={false} buttons={buttons}>
-            <AppList apps={apps}/>
-            {/* <WindowButtons isMirrored={false} buttons={buttons}/> */}
+    if(!isLoading){      
+      return (
+        <Window 
+         areButtons={true}
+         isMirrored={false} 
+         buttons={buttons}
+         name='Subscribed Apps'
+         linkBack='/start'
+        >
+          {apps.length > 0 ? 
+            (<AppList apps={apps}/>):
+            (<StyledP>You have no subscribed apps yet.</StyledP>)
+          }
         </Window>
-    );
+      );
+    }
+
 }
