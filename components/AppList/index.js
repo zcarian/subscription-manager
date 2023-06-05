@@ -11,12 +11,12 @@ import Image from 'next/image';
 export default function AppList({apps}) {
     const { push } = useRouter();
   return (
-    <List sx={{ width: '100%', bgcolor: 'white', paddingTop:'2vh', paddingBottom:'-8px'}} position='sticky'>
+    <List sx={{ width: '100%', bgcolor: 'white', paddingTop:'2vh', paddingBottom:'0px'}} position='sticky'>
         {apps.map((app, index) => (
             <React.Fragment>
                 <ListItem alignItems="center" key={index} onClick={()=>{push(`/subscribed-apps/${app._id}`)}}>
                 <ListItemAvatar>
-                    <Image alt={app.name} src={app.icon} height={50} width={50}/>
+                    <Image alt={app.name} src={app.icon} height={50} width={50} style={{border:'2px solid #0078D7'}}/>
                 </ListItemAvatar>
                 <ListItemText sx={{alignItems:'center'}}
                     primary={app.name}

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const pages =[
     {
@@ -10,7 +12,7 @@ const pages =[
     },
     {
         name: 'Charts',
-        path: '/charts/summary',
+        path: '/charts',
         icon:'/chart.png',
     },
     {
@@ -50,20 +52,37 @@ const StyledLink = styled(Link)`
     align-items: center;
 `
 
+const StyledButton = styled.button`
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    width: 100%;
+`
+
 const Icon = styled(Image)`
     margin-right: 10px;
 `
 
 export default function NavList(){
+
+    const {data: session} = useSession();
+
+    console.log(session);
+
+    const {push} = useRouter();
+
     return(
         <NavListContainer>
             <NavItems>
                 {pages.map((page, index) => (
                     <NavItem key={index}>
-                        <StyledLink href={page.path}>
+                        <StyledButton onClick={()=>{session ? (push(page.path)):(alert('You are not Logged in'))}}>
                             <Icon src={page.icon} alt={`${page.name} icon`} width={40} height={40} />
                             {page.name}
-                        </StyledLink>   
+                        </StyledButton>   
                     </NavItem>
                 ))}
             </NavItems>    

@@ -47,6 +47,6 @@ export function transformData(apps, isInTwoMonths = false) {
 
   export function renderEventContent(eventInfo) {
     return (
-      <img src={eventInfo.event.extendedProps.icon} alt="" style={{ width: '50%', height: '50%' }} />
+      <img src={eventInfo.event.extendedProps.icon} alt="" style={{ width: '50%', height: '50%', border: 'black 1px solid' }} />
     );
   }

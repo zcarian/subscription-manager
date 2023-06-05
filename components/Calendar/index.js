@@ -13,21 +13,7 @@ const CalendarContainer = styled.div`
 export default function CalendarComponent({ apps }) {
   const {push} = useRouter();
 
-  // console.log(apps);
-
   const events = transformData(apps, true);
-
-  // console.log(events);
-
-  const howMany = apps.map((app)=>{
-    return (
-      {
-        name:app.name,
-        count:events.filter((event)=>event.title===app.name).length
-      }
-    ) 
-  })
-  // console.log(howMany);
 
   function handleEventClick(info) {
     push(`/subscribed-apps/${info.event.id}`);

@@ -17,7 +17,7 @@ export default function AppDetails({app, deleteApp}) {
 
   return (
     <>
-    <Window closePath='/'>
+    <Window linkBack='/subscribed-apps'>
     <Box sx={{ flexGrow: 1, padding: '10px'}}>
       <Typography sx={{textAlign:'center'}}><h3>{app.name}</h3></Typography>
       <Grid container spacing={2}>
@@ -44,7 +44,7 @@ export default function AppDetails({app, deleteApp}) {
     </Box>
     </Window>
     {isUnsubscribeTextVisible && 
-            <Window closePath={`/subscribed-apps/${app._id}`}>
+            <Window linkBack='/subscribed-apps'>
               <ol>
                 {steps?.map((step, index) => (
                   <li key={index}>{step}

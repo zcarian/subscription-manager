@@ -24,6 +24,29 @@ const StyledButton = styled.button`
   display: inline-block;
   font-size: 16px;
   `
+  const StyledList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  `
+
+const StyledListItem = styled.li`
+  height: auto;
+  border: 5px solid #0078D7;
+  font-family: 'Tahoma', sans-serif;
+  display: flex;
+  align-items: center;
+  background-color: #d3e5fb;
+  cursor: pointer;
+  `
+
+const SuggestionIcon = styled(Image)`
+  border-right: 5px solid #0078D7;
+`
+const SuggestionName = styled.p`
+  padding: 10px;
+  margin: 0;
+  `
 
 export default function Form({ onSubmit, appData }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,13 +65,22 @@ export default function Form({ onSubmit, appData }) {
   const { isSuggestionsOpen, setIsSuggestionsOpen } = useSuggestions();
 
   const handleNameChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { value } = e.target;
     setSearchTerm(value);
+    if(searchedAppData.length !== 0) {
+      setFormData((prevData) => ({
+        ...prevData,
+        name: value,
+        icon: searchedAppData[0].icon,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        name: value,
+      }));
+    }
     setIsSuggestionsOpen(true);
+    console.log(searchedAppData)
   };
 
   const handleSuggestionClick = (suggestion) => {
@@ -62,6 +94,13 @@ export default function Form({ onSubmit, appData }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    if(isSuggestionsOpen) {
+      setFormData((prevData) => ({
+        ...prevData,
+        name: searchedAppData[0].title,
+        icon: searchedAppData[0].icon,
+      }));
+    }
     onSubmit(formData);
   }
   return (
@@ -70,15 +109,17 @@ export default function Form({ onSubmit, appData }) {
       <input type="text" id="name" name="name" value={formData.name} onChange={handleNameChange} autoComplete="off" required/>
 
       {isSuggestionsOpen && searchedAppData && searchTerm !== "" && (
-        <ul>
+        <StyledList>
         {searchedAppData.map((suggestion, index) => (
-          <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-            {suggestion.title} 
-            {suggestion.icon && <Image src={suggestion.icon} alt="halo" height={100}
-            width={100}/> }
-          </li>
+          <StyledListItem key={index} onClick={() => handleSuggestionClick(suggestion)}>
+            {suggestion.icon && <SuggestionIcon src={suggestion.icon} alt={`${suggestion.title}`} height={40}
+            width={45}/> }
+            <SuggestionName>
+              {suggestion.title}
+            </SuggestionName>
+          </StyledListItem>
         ))}
-      </ul>
+      </StyledList>
       )}
 
       <Label htmlFor="price">Price</Label>

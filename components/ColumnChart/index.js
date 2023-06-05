@@ -1,5 +1,4 @@
 import { Chart } from "react-google-charts";
-// import React, { useEffect, useState } from 'react';
 
 export default function ColumnChart({data}){
 
@@ -25,10 +24,8 @@ export default function ColumnChart({data}){
                 price = price;
         }
         let name = app.name.match(pattern);
-        // console.log(name);
         let formatedName
         name ? formatedName = name[0].trim() : formatedName = app.name;
-        console.log(formatedName, price)
         chartData.push([formatedName, Number(price.toFixed(2)),'#' + Math.floor(Math.random()*16777215).toString(16)]);
     });
 
@@ -43,8 +40,6 @@ export default function ColumnChart({data}){
             },
         },
         legend: 'none',
-        // chartArea: { height: "50%" },
-
     };
 
   return (

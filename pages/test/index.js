@@ -1,18 +1,7 @@
-import useSWR from 'swr';
-import BarChartComponent from '../../components/BarChart';
-import Window from '../../components/Window';
+import ErrorWindow from "../../components/ErrorWindow";
 
-export default function Home() {
-
-    const { data, isLoading } = useSWR('/api/subscribed-apps');
-
-    const apps = data?.apps
-
-    if (isLoading) return <div>Loading...</div>;
-
-    return (
-        <Window> 
-            <BarChartComponent apps={apps} />
-        </Window>
-    );
+export default function TestPage() {
+  return (
+    <ErrorWindow title="Error" message="This is an error message." />
+  );
 }
