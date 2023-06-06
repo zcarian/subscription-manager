@@ -40,6 +40,7 @@ export default function ColumnChart({data}){
             },
         },
         legend: 'none',
+        title: 'Monthly costs comparison',
     };
 
   return (
