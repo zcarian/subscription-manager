@@ -36,6 +36,12 @@ export default function SubscribedAppsPage() {
     const { data, isLoading } = useSWR('/api/subscribed-apps');
 
     const apps = data?.apps
+    
+    if(isLoading){
+      <Window>
+        <StyledP>Loading...</StyledP>
+      </Window>
+    }
 
     if(!isLoading){      
       return (

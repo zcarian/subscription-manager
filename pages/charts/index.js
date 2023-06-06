@@ -5,6 +5,14 @@ import BarChartComponent from "../../components/BarChart";
 import DonutChart from "../../components/DonutChart";
 import ColumnChart from "../../components/ColumnChart";
 import { useRouter } from 'next/router'
+import styled from 'styled-components';
+
+const StyledP = styled.p`
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  `
+
 
 export default function ChartsPage() {
   const { data, isLoading } = useSWR('/api/subscribed-apps');
@@ -49,13 +57,15 @@ export default function ChartsPage() {
 
   if(data) return (
     <Window 
-     areButtons={true} 
+     areButtons={data.apps.length === 0 ? false : true} 
      isMirrored={true} 
      buttons={buttons}
      name='Charts'
      linkBack='/start'
     >
-      {chartComponent}
+      {data.apps.length === 0 ?
+      (<StyledP>You have no subscribed apps yet.</StyledP>) :
+      (chartComponent)}
     </Window>
   );
 }
