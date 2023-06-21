@@ -8,8 +8,6 @@ export default function Home() {
 
     const apps = data?.apps
 
-    // if (isLoading) return <div>Loading...</div>;
-
     if (!isLoading) {
         return (
             <Window name='Calendar' linkBack='/start'> 

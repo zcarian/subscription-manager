@@ -12,7 +12,6 @@ const Navbar = styled.nav`
   height: 3vh;
   background: linear-gradient(to bottom, #5499f5 0%, #0078D7 15%, #0078D7 100%);
   color: white;
-  /* padding: 0 15px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 2000;
 `;
@@ -27,11 +26,9 @@ const StartButton = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  /* margin: 4px 2px; */
   cursor: pointer;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
-  /* border-radius: 3px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.5);
 `;

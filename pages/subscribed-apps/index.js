@@ -1,7 +1,6 @@
 import useSWR from 'swr';
 import AppList from '../../components/AppList';
 import Window from '../../components/Window';
-import WindowButtons from '../../components/WindowButtons';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 

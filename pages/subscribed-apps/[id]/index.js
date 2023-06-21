@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router.js';
 import useSWR from 'swr';
 import AppDetails from '../../../components/AppDetails';
-import Window from '../../../components/Window';
 
 export default function DetailsPage() {
 

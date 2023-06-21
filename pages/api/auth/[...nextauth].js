@@ -26,13 +26,12 @@ export const authOptions = {
   callbacks: {
     async signIn(user, account, session) {
       user.user.apps = [];  
-      console.log("user in signIn:", user);
       user.user.accessToken = user.account.access_token;
       user.user.refreshToken = user.account.refresh_token;
+      // console.log("user in signIn:", user);
       // console.log("token:", user.account.access_token)
       // console.log("session in signIn:", session);
       // console.log("account in signIn:", account);
-      // console.log("here",user.user);
       return true;
     },
     async session({session, user, token, account}) {
@@ -44,13 +43,7 @@ export const authOptions = {
       // console.log("user in session:", user);
       // console.log("token in session:", token);
       return session
-    },
-    // async jwt(token, user, account, profile, isNewUser) {
-      // console.log("account in jwt:", account);
-      // console.log("user in jwt:", user);
-      // console.log("token in jwt:", token);
-      // return token;
-    // }    
+    },  
   },
   adapter: MongoDBAdapter(clientPromise),
 }
