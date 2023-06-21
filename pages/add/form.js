@@ -2,7 +2,6 @@ import Form from "../../components/Form";
 import { useRouter } from "next/router";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next"
-import Link from "next/link";
 import Window from "../../components/Window";
 
 export default function AddEntryPage() {

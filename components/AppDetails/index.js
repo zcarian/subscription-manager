@@ -7,7 +7,6 @@ import { Typography } from '@mui/material';
 import Image from 'next/image';
 import useFetchUnsubscribe from '../../hooks/useFetchUnsubscribe';
 import Window from '../Window';
-import styled from 'styled-components';
 
 export default function AppDetails({app, deleteApp}) {
 

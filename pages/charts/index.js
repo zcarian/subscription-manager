@@ -4,7 +4,6 @@ import useSWR from 'swr'
 import BarChartComponent from "../../components/BarChart";
 import DonutChart from "../../components/DonutChart";
 import ColumnChart from "../../components/ColumnChart";
-import { useRouter } from 'next/router'
 import styled from 'styled-components';
 
 const StyledP = styled.p`

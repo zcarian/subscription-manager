@@ -80,7 +80,7 @@ export default function Form({ onSubmit, appData }) {
       }));
     }
     setIsSuggestionsOpen(true);
-    console.log(searchedAppData)
+    // console.log(searchedAppData)
   };
 
   const handleSuggestionClick = (suggestion) => {

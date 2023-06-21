@@ -35,13 +35,9 @@ apps.forEach((app) => {
     console.log(name);
     let formatedName
     name ? formatedName = name[0].trim() : formatedName = app.name;
-    // let formatedName = name[0].trim();
     // console.log(app.name, totalPrice);
     chartData.push([formatedName, Number(totalPrice.toFixed(2)),'#' + Math.floor(Math.random()*16777215).toString(16)]);
 });
-
-    // const maxPrice = ;
-
     const maxPrice = Math.ceil(Math.max(...chartData.slice(1).map((item)=>item[1])) / 100) * 100;
 
     const options = {
@@ -64,6 +60,5 @@ apps.forEach((app) => {
      data={chartData} 
      options={options} 
     />
-    // <></>
   )
 }

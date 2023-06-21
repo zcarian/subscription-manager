@@ -8,9 +8,6 @@ const WindowContainer = styled.div`
     flex-direction:column;
     width:96vw;
     max-height:90vh;
-    /* position:absolute;
-    top: 2vh;
-    left: 4vw; */
     margin-left:2vw;
     margin-top:2vh;
     background-color:white;
@@ -24,8 +21,6 @@ const WindowContainer = styled.div`
 const ActionBar = styled.div`
     display:flex;
     width:96vw;
-    /* padding-top:5px;
-    padding-right:5px; */
     height: auto;
     background: linear-gradient(to bottom, #0078D7 0%, #4e8fe0 100%);
     justify-content:space-between;
@@ -47,7 +42,6 @@ const StyledDiv = styled.div`
 const Name = styled.h4`
     color: #fff;
     padding-right: auto;
-    /* align-self:flex-start; */
 `
 
 export default function Window({children, areButtons, isMirrored, buttons, linkBack, name}){
