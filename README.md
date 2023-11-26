@@ -1,4 +1,4 @@
-#Subscription manager
+# Subscription manager
 
 ![](https://github.com/zcarian/subscription-manager/blob/main/public/preview.gif)
 
